@@ -1,0 +1,9 @@
+body {
+  background: cornsilk;
+
+  display: flex;
+
+}
+.redButton {
+    background: yellowgreen;
+}
