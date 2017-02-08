@@ -6,26 +6,25 @@
 import './main.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Component from './component';
 import Routers from './router'
 import {AppContainer} from 'react-hot-loader';
 import {store, Provider} from 'rx-reactstore'
 
-const render = App => {
+const render = () => {
     ReactDOM.render(
         <AppContainer>
         <Provider store={store}><Routers/></Provider>
     </AppContainer>, document.getElementById('app'));
 };
-const renderApp = App => {
+const renderApp = () => {
     ReactDOM.render(
         <Provider store={store}><Routers/></Provider>, document.getElementById('app'));
 };
 
-renderApp(Component);
+renderApp();
 
 if (module.hot) {
     module
         .hot
-        .accept('./router', () => render(Component));
+        .accept('./router', () => render());
 }
