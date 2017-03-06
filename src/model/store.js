@@ -5,7 +5,10 @@ const initailSub = {
         1, 2, 3, 4
     ],
     c: {
-        xx: "ok"
+        xx: 'ok'
+    },
+    user:{
+        name:'name1111'
     }
 }
 
@@ -17,7 +20,7 @@ subStreamStore
     .subscribe(subStreamStore.updateStore)
 subStreamStore
     .b
-    .map(v => ({b: v, a: "newa"}))
+    .map(v => ({b: v, a: 'newa'}))
     .subscribe(subStreamStore.updateStore)
 
 subStreamStore

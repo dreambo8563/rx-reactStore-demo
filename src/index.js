@@ -1,8 +1,3 @@
-// import component from './component'; import img from './1.png' import
-// 'react'; document     .body     .appendChild(component()); const element =
-// document.createElement('img'); element.src = img document     .body
-// .appendChild(element)
-
 import './main.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
