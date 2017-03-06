@@ -4,7 +4,7 @@ import React, {Component, PropTypes} from 'react';
 // import {subStreamStore} from './model/store'
 import {injectProps} from 'rx-reactstore'
 import Layout from './layouts/AppLayout'
-import userRoute from './modules/user'
+import userRoute from './routes/User'
 
 const selector = (state) => {
     // console.log(state, "selector");
