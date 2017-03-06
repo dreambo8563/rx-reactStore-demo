@@ -44,10 +44,10 @@
     "webpack-merge": "^2.6.1"
   },
   "dependencies": {
-    "rx-reactstore": "^1.0.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-router": "^3.0.2",
+    "rx-reactstore": "^1.0.10",
     "rxjs": "^5.1.0"
   }
 }
