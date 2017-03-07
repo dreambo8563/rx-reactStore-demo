@@ -24,7 +24,7 @@ const common = merge([
         output: {
             path: PATHS.build,
             filename: '[name].[hash].js',
-            publicPath :'/'
+            publicPath: '/'
         },
         plugins: [new HtmlWebpackPlugin({
                 template: HtmlWebpackTemplate, title: 'demo', appMountId: 'app', // Generate #app where to mount
@@ -32,7 +32,18 @@ const common = merge([
                 inject: false, // html-webpack-template requires this to work
             })],
         resolve: {
-            extensions: ['.js', '.jsx','css']
+            extensions: [
+                '.js', '.jsx', 'css'
+            ],
+            alias: {
+                shared: path.resolve(__dirname, 'appSettings'),
+                assets: path.resolve(__dirname, 'src/static'),
+                utils: path.resolve(__dirname, 'src/utils'),
+                modules: path.resolve(__dirname, 'src/routes'),
+                layout: path.resolve(__dirname, 'src/layouts'),
+                constants: path.resolve(__dirname, 'src/constants'),
+                model: path.resolve(__dirname, 'src/model/store')
+            }
         }
     },
     parts.loadImages({
@@ -45,7 +56,7 @@ const common = merge([
 ]);
 
 module.exports = function (env) {
-     process.env.BABEL_ENV = env;
+    process.env.BABEL_ENV = env;
     if (env === 'production') {
         return merge([
             common, {
@@ -62,7 +73,7 @@ module.exports = function (env) {
                 bundles: [
                     {
                         name: 'vendor',
-                        entries: ['react','react-router','react-dom']
+                        entries: ['react', 'react-router', 'react-dom']
                     }, {
                         name: 'manifest'
                     }

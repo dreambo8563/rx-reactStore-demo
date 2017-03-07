@@ -3,7 +3,8 @@ import {Link} from 'react-router'
 import {injectProps} from 'rx-reactstore'
 
 const selector = (state) => {
-    return ({user: state.subStore.user})
+   // console.log(state);
+    return ({user: state.store.user})
 };
 
 @injectProps(selector)
@@ -13,6 +14,7 @@ class Users extends Component {
         children: PropTypes.node
     }
     render() {
+       // console.log(this.props);
         return (
             <div>
                 <h1>Users</h1>

@@ -1,5 +1,8 @@
 import {createStore} from 'rx-reactstore'
-const initailSub = {
+import {userState} from 'modules/User/model'
+
+
+export const initailStore = {
     a: 123,
     b: [
         1, 2, 3, 4
@@ -7,24 +10,38 @@ const initailSub = {
     c: {
         xx: 'ok'
     },
-    user:{
-        name:'name1111'
+    user: {
+        name: 'name1111'
     }
 }
 
-export const subStreamStore = createStore(initailSub, 'subStore')
+export const store$ = createStore({
+    ...initailStore,
+    userState
+}, 'store')
 
-subStreamStore
+store$
     .a
     .map(v => ({a: v}))
-    .subscribe(subStreamStore.updateStore)
-subStreamStore
+    .subscribe(store$.updateStore)
+
+store$
     .b
     .map(v => ({b: v, a: 'newa'}))
-    .subscribe(subStreamStore.updateStore)
+    .subscribe(store$.updateStore)
 
-subStreamStore
+store$
     .c
     .xx
     .map(v => ({xx: v}))
-    .subscribe(subStreamStore.c.updateStore)
+    .subscribe(store$.c.updateStore)
+
+    store$
+    .user
+    .name
+    .map(v => ({name: v}))
+    .subscribe(store$.c.updateStore)
+
+export function getStore() {
+    return store$
+}

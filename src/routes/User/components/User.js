@@ -1,10 +1,11 @@
 import React, {Component, PropTypes} from 'react';
 import {injectProps} from 'rx-reactstore'
-import {subStreamStore} from './../../../model/store'
+import {store$} from 'model'
+import {changeUserProps} from '../services'
 
 const selector = (state) => {
-    // console.log(state, "selector");
-    return ({itemsSelected: state.subStore})
+    console.log(state, "selector");
+    return ({itemsSelected: state.store})
 };
 
 @injectProps(selector)
@@ -13,13 +14,14 @@ class User extends Component {
         itemsSelected: PropTypes.object
     }
     click() {
-        subStreamStore
+        changeUserProps({name: 'vincent'})
+        store$
             .a
             .next('aa')
-        subStreamStore
+        store$
             .b
             .next('bb')
-        subStreamStore
+        store$
             .c
             .xx
             .next('c-xx')

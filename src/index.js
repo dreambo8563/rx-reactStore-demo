@@ -1,10 +1,11 @@
 import './main.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
+// import {store$} from 'model'
 import Routers from './router'
 import {AppContainer} from 'react-hot-loader';
 import {store, Provider} from 'rx-reactstore'
-
+// console.log(store$);
 const render = () => {
     ReactDOM.render(
         <AppContainer>
