@@ -1,14 +1,3 @@
-import {Route} from 'react-router'
-import React from 'react';
-// import User from './components/User' import Users from './components/Users'
-
-/*const router = (
-    <Route path='users' component={Users}>
-        <Route path=':userId' component={User}/>
-    </Route>
-)
-
-export default router*/
 
 export let User = () => ({
     /*  Async getComponent is only invoked when route matches   */
@@ -37,9 +26,9 @@ export let Users = () => ({
         require.ensure([], (require) => {
             /*  Webpack - use require callback to define
           dependencies for bundling   */
-            const ApplyAdd = require('./components/Users').default
+            const Users = require('./components/Users').default
 
-            cb(null, ApplyAdd)
+            cb(null, Users)
 
             /* Webpack named bundle   */
         }, 'Users')

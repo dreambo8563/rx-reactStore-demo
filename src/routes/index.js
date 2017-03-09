@@ -1,9 +1,8 @@
 // We only need to import the modules necessary for initial render
-import {Layout} from 'layout/AppLayout'
-import {App} from 'shared/App'
-// import CounterRoute from './Counter'
-// import NotFound from './NotFound'
-import Users from './User'
+import AppLayout from 'layouts/AppLayout'
+import Home from 'modules/Home'
+import NotFound from 'shared/NotFound'
+import Users from 'modules/User'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -11,11 +10,12 @@ import Users from './User'
 export const createRoutes = (store) => ([
     {
         path: '/',
-        component: Layout,
-        indexRoute: App(),
-        childRoutes: [
-         Users()
-        ]
+        component: AppLayout,
+        indexRoute: Home(),
+        childRoutes: [Users()]
+    }, {
+        path: '*',
+        component: NotFound
     }
 ])
 

@@ -1,12 +1,10 @@
-// import getStream from 'utils/getStream' import {getStore} from 'model' import
-// {Subject} from 'rxjs/Subject';
-import {store$} from 'model'
 
-// const userStream = {}
-console.log();
+import {store$} from 'store'
+
+const userState = store$.userState
+
 export function changeUserProps(obj) {
-    store$
-        .userState
+    userState
         .updateStore
         .next({
             ...obj

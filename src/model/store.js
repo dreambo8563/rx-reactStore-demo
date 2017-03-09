@@ -26,7 +26,7 @@ store$
 
 store$
     .b
-    .map(v => ({b: v, a: 'newa'}))
+    .map(v => ({b: v}))
     .subscribe(store$.updateStore)
 
 store$

@@ -1,12 +1,9 @@
-import './main.css';
+import 'shared/main';
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import {store$} from 'model'
 import {browserHistory} from 'react-router'
 import AppContainer from 'shared/AppContainer';
-// import {store} from 'rx-reactstore'
-import {getStore} from 'model'
-// console.log(store$);
+import {getStore} from 'store'
 
 const store = getStore()
 

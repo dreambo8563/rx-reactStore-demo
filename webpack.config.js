@@ -33,16 +33,16 @@ const common = merge([
             })],
         resolve: {
             extensions: [
-                '.js', '.jsx', 'css'
+                '.js', '.jsx', '.css'
             ],
             alias: {
                 shared: path.resolve(__dirname, 'src/appSettings'),
                 assets: path.resolve(__dirname, 'src/static'),
                 utils: path.resolve(__dirname, 'src/utils'),
                 modules: path.resolve(__dirname, 'src/routes'),
-                layout: path.resolve(__dirname, 'src/layouts'),
+                layouts: path.resolve(__dirname, 'src/layouts'),
                 constants: path.resolve(__dirname, 'src/constants'),
-                model: path.resolve(__dirname, 'src/model/store')
+                store: path.resolve(__dirname, 'src/model/store')
             }
         }
     },
