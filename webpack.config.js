@@ -36,7 +36,7 @@ const common = merge([
                 '.js', '.jsx', 'css'
             ],
             alias: {
-                shared: path.resolve(__dirname, 'appSettings'),
+                shared: path.resolve(__dirname, 'src/appSettings'),
                 assets: path.resolve(__dirname, 'src/static'),
                 utils: path.resolve(__dirname, 'src/utils'),
                 modules: path.resolve(__dirname, 'src/routes'),

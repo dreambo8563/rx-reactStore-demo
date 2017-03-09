@@ -1,6 +1,5 @@
-import {createStore} from 'rx-reactstore'
+import {createStore, store} from 'rx-reactstore'
 import {userState} from 'modules/User/model'
-
 
 export const initailStore = {
     a: 123,
@@ -36,12 +35,12 @@ store$
     .map(v => ({xx: v}))
     .subscribe(store$.c.updateStore)
 
-    store$
+store$
     .user
     .name
     .map(v => ({name: v}))
     .subscribe(store$.c.updateStore)
 
 export function getStore() {
-    return store$
+    return store
 }
