@@ -25,6 +25,7 @@ class User extends Component {
             .c
             .xx
             .next('c-xx')
+ changeUserProps({man: true})
     }
 
     render() {

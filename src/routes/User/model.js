@@ -2,5 +2,7 @@
 export const userState = {
     name: null,
     gender: null,
-    job: null
+    job: null,
+    man:false,
+    age:0
 }
