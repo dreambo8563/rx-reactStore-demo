@@ -67,11 +67,17 @@ exports.extractCSS = function ({include, exclude, use}) {
                     include,
                     exclude,
                     use: ExtractTextPlugin.extract({use: use, fallback: 'style-loader'})
+                }, {
+                    test: /\.less$/,
+                    use: ExtractTextPlugin.extract({
+                        fallback: 'style-loader',
+                        use: ['css-loader', 'less-loader']
+                    })
                 }
             ]
         },
         plugins: [// Output extracted CSS to a file
-            new ExtractTextPlugin('[name].[contenthash].css')]
+            new ExtractTextPlugin({filename: '[name].[contenthash].css', allChunks: true})]
     };
 };
 
@@ -165,7 +171,6 @@ exports.loadJavaScript = function ({include, exclude}) {
                     test: /\.js$/,
                     include,
                     exclude,
-
                     loader: 'babel-loader',
                     options: {
                         // Enable caching for improved performance during development. It uses default
