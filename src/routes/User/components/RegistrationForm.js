@@ -64,6 +64,12 @@ class RegistrationForm extends Component {
                 }
             });
     }
+    onField(e) {
+        console.log('on field change', e.target.value);
+        const form = this.props.form;
+        form.setFieldsValue({'email': e.target.value})
+          form.validateFields(['email'], {force: true});
+    }
     change(e) {
         console.log('change', e.target.value);
     }
@@ -143,7 +149,10 @@ class RegistrationForm extends Component {
                                 validator: this.checkPassword
                             }
                         ]
-                    })(<Input type='password' onBlur={this.handleConfirmBlur}/>)}
+                    })(<Input
+                        type='password'
+                        onChange={:: this.onField}
+                        onBlur={this.handleConfirmBlur}/>)}
                 </FormItem>
                 <FormItem
                     {...formItemLayout}
