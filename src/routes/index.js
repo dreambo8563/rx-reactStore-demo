@@ -3,7 +3,6 @@ import AppLayout from 'layouts/AppLayout'
 import Home from 'modules/Home'
 import NotFound from 'shared/NotFound'
 import Users from 'modules/User'
-
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
 

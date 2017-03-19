@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router'
 import {injectProps} from 'rx-reactstore'
+import RegistrationForm from './RegistrationForm'
 
 const selector = (state) => {
     // console.log(state);
@@ -32,6 +33,7 @@ class Users extends Component {
                 <div className='detail'>
                     {this.props.children}
                 </div>
+                <RegistrationForm />
             </div>
         )
     }
