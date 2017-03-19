@@ -1,4 +1,3 @@
-
 export let User = () => ({
     /*  Async getComponent is only invoked when route matches   */
     path: ':userId',
