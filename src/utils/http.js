@@ -3,19 +3,28 @@ import 'rxjs/add/observable/dom/ajax';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/of';
+import {store$} from 'store'
 
 const defaultOption = {
     crossDomain: true,
     withCredentials: true
 }
 export const jsonGet = (url) => {
+    store$
+        .updateStore
+        .next({loading: true})
     return Observable
         .ajax({
         url,
         method: 'GET',
         ...defaultOption
     })
-        .catch(err => Observable.of(err))
+        .catch(err => {
+            store$
+                .updateStore
+                .next({loading: false})
+            return Observable.of(err)
+        })
         .filter(res => {
             if (res.status === 403) {
                 console.log('get 403 response')

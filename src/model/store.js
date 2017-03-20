@@ -2,6 +2,7 @@ import {createStore, store} from 'rx-reactstore'
 import {userState} from 'modules/User/model'
 
 export const initailStore = {
+    loading: false,
     a: 123,
     b: [
         1, 2, 3, 4

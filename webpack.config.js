@@ -85,6 +85,15 @@ module.exports = function (env) {
                 use: [
                     'css-loader?modules', parts.autoprefix()
                 ]
+            }),
+            parts.minifyCSS({
+                options: {
+                    discardComments: {
+                        removeAll: true
+                    },
+                    // Run cssnano in safe mode to avoid potentially unsafe transformations.
+                    safe: true
+                }
             })
         ]);
     }
