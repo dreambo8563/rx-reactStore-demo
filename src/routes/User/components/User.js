@@ -18,6 +18,7 @@ class User extends Component {
         changeUserProps({name: 'vincent'})
         jsonGet('http://jsonplaceholder.typicode.com/posts').subscribe(x => console.log(x))
 
+        jsonGet('http://localhost:4000/api').subscribe(x => console.log(x))
         jsonPost('http://jsonplaceholder.typicode.com/posts', {
             title: 'foo',
             body: 'bar',

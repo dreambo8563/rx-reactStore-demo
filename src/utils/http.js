@@ -8,7 +8,8 @@ import {store$} from 'store'
 
 const defaultOption = {
     crossDomain: true,
-    withCredentials: true
+    withCredentials: true,
+    timeout: 3000
 }
 
 export const jsonCommon = (options) => {
@@ -39,16 +40,21 @@ export const jsonCommon = (options) => {
                 console.log('server error');
                 return false
             }
+            if (res.status === 0) {
+                console.log('timeout issue');
+                return false
+            }
             if (res.status === 200 || res.status === 201) {
                 console.log('get response');
                 return true
             }
+            console.log(res, 'other status code');
         })
         .map(res => {
             store$
                 .updateStore
                 .next({loading: false})
-            return res
+            return res.response
         })
 }
 
