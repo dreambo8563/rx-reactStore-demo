@@ -16,7 +16,7 @@ class AppLayout extends Component {
     render() {
         const {loading, children} = this.props
         return (
-            <div>
+            <div className='redButton'>
                 layout herer match {children}
                 {loading}
                 {loading

@@ -1,9 +1,8 @@
 body {
-  background: cornsilk;
-
-  display: flex;
-
+    background: cornsilk;
+    display: flex;
 }
-.redButton {
+
+:global(.redButton) {
     background: yellowgreen;
 }
