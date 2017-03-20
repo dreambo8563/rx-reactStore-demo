@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {injectProps} from 'rx-reactstore'
 import {store$} from 'store'
 import {changeUserProps} from '../services'
-import {jsonGet, jsonPost, jsonPut} from 'utils/http'
+import {jsonGet, jsonPost, jsonPut, jsonDelete, allFinishedFor} from 'utils/http'
 
 const selector = (state) => {
     console.log(state, 'selector');
@@ -16,21 +16,33 @@ class User extends Component {
     }
     click() {
         changeUserProps({name: 'vincent'})
-        jsonGet('http://jsonplaceholder.typicode.com/posts').subscribe(x => console.log(x))
+        // const get = jsonGet('http://jsonplaceholder.typicode.com/posts') const
+        // timeout = jsonGet('http://localhost:4000/api') const post =
+        // jsonPost('http://jsonplaceholder.typicode.com/posts', {     title: 'foo',
+        // body: 'bar',     userId: 2 })
+        allFinishedFor([
+            {
+                url: 'http://jsonplaceholder.typicode.com/posts',
+                method: 'GET'
+            }, {
+                url: 'http://jsonplaceholder.typicode.com/posts',
+                method: 'POST',
+                body: {
+                    title: 'foo',
+                    body: 'bar',
+                    userId: 2
+                }
+            }, {
+                url: 'http://jsonplaceholder.typicode.com/posts/1',
+                method: 'DELETE'
+            }
+        ]).subscribe(x => console.log(x, 'forkjoin'))
 
-        jsonGet('http://localhost:4000/api').subscribe(x => console.log(x))
-        jsonPost('http://jsonplaceholder.typicode.com/posts', {
-            title: 'foo',
-            body: 'bar',
-            userId: 1
-        }).subscribe(x => console.log(`${JSON.stringify(x)} -- post`))
-
-        jsonPut('http://jsonplaceholder.typicode.com/posts/1', {
-            d: 1,
-            title: 'foo',
-            body: 'bar',
-            userId: 1
-        }).subscribe(x => console.log(`${JSON.stringify(x)} -- put`))
+        // jsonPut('http://jsonplaceholder.typicode.com/posts/1', {     d: 1,     title:
+        // 'foo',     body: 'bar',     userId: 1 }).subscribe(x =>
+        // console.log(`${JSON.stringify(x)} -- put`))
+        // jsonDelete('http://jsonplaceholder.typicode.com/posts/1').subscribe(x =>
+        // console.log(`${JSON.stringify(x)} -- delete`))
         store$
             .a
             .next(100)
