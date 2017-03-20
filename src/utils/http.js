@@ -1,22 +1,23 @@
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/observable/dom/ajax';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/of';
+import {Observable} from 'rxjs/Observable'
+import 'rxjs/add/observable/dom/ajax'
+import 'rxjs/add/operator/filter'
+import 'rxjs/add/operator/catch'
+import 'rxjs/add/observable/of'
+import 'rxjs/add/operator/map'
 import {store$} from 'store'
 
 const defaultOption = {
     crossDomain: true,
     withCredentials: true
 }
-export const jsonGet = (url) => {
+
+export const jsonCommon = (options) => {
     store$
         .updateStore
         .next({loading: true})
     return Observable
         .ajax({
-        url,
-        method: 'GET',
+        ...options,
         ...defaultOption
     })
         .catch(err => {
@@ -38,9 +39,23 @@ export const jsonGet = (url) => {
                 console.log('server error');
                 return false
             }
-            if (res.status === 200) {
+            if (res.status === 200 || res.status === 201) {
                 console.log('get response');
                 return true
             }
         })
+        .map(res => {
+            store$
+                .updateStore
+                .next({loading: false})
+            return res
+        })
+}
+
+export const jsonGet = (url) => {
+    return jsonCommon({method: 'GET', url})
+}
+
+export const jsonPost = (url, body) => {
+    return jsonCommon({method: 'POST', url, body})
 }
