@@ -65,3 +65,7 @@ export const jsonGet = (url) => {
 export const jsonPost = (url, body) => {
     return jsonCommon({method: 'POST', url, body})
 }
+
+export const jsonPut = (url, body) => {
+    return jsonCommon({method: 'PUT', url, body})
+}

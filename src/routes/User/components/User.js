@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {injectProps} from 'rx-reactstore'
 import {store$} from 'store'
 import {changeUserProps} from '../services'
-import {jsonGet, jsonPost} from 'utils/http'
+import {jsonGet, jsonPost, jsonPut} from 'utils/http'
 
 const selector = (state) => {
     console.log(state, 'selector');
@@ -25,6 +25,12 @@ class User extends Component {
             userId: 1
         }).subscribe(x => console.log(`${JSON.stringify(x)} -- post`))
 
+        jsonPut('http://jsonplaceholder.typicode.com/posts/1', {
+            d: 1,
+            title: 'foo',
+            body: 'bar',
+            userId: 1
+        }).subscribe(x => console.log(`${JSON.stringify(x)} -- put`))
         store$
             .a
             .next(100)
