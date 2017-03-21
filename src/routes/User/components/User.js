@@ -38,11 +38,13 @@ class User extends Component {
             }
         ]).subscribe(x => console.log(x, 'forkjoin'))
 
-        // jsonPut('http://jsonplaceholder.typicode.com/posts/1', {     d: 1,     title:
-        // 'foo',     body: 'bar',     userId: 1 }).subscribe(x =>
-        // console.log(`${JSON.stringify(x)} -- put`))
-        // jsonDelete('http://jsonplaceholder.typicode.com/posts/1').subscribe(x =>
-        // console.log(`${JSON.stringify(x)} -- delete`))
+        jsonPut('http://jsonplaceholder.typicode.com/posts/1', {
+            d: 1,
+            title: 'foo',
+            body: 'bar',
+            userId: 1
+        }).subscribe(x => console.log(`${JSON.stringify(x)} -- put`))
+        jsonDelete('http://jsonplaceholder.typicode.com/posts/1').subscribe(x => console.log(`${JSON.stringify(x)} -- delete`))
         store$
             .a
             .next(100)

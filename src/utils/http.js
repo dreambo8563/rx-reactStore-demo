@@ -17,6 +17,29 @@ const defaultOption = {
     timeout: 3000
 }
 
+const filterErrorResponse = (res) => {
+    store$
+        .updateStore
+        .next({loading: false})
+    if (res.status === 403) {
+        console.log('get 403 response')
+        return false
+    }
+    if (res.status === 404) {
+        console.log('get 404 response')
+        return false
+    }
+    if (res.status >= 500) {
+        console.log('server error');
+        return false
+    }
+    if (res.status === 0) {
+        console.log('timeout issue');
+        return false
+    }
+    return true
+}
+
 export const jsonCommon = (options) => {
     store$
         .updateStore
@@ -28,31 +51,13 @@ export const jsonCommon = (options) => {
     })
         .catch(err => Observable.of(err))
         .filter(res => {
-            store$
-                .updateStore
-                .next({loading: false})
-            if (res.status === 403) {
-                console.log('get 403 response')
-                return false
-            }
-            if (res.status === 404) {
-                console.log('get 404 response')
-                return false
-            }
-            if (res.status >= 500) {
-                console.log('server error');
-                return false
-            }
-            if (res.status === 0) {
-                console.log('timeout issue');
-                return false
-            }
             if (res.status === 200 || res.status === 201) {
                 console.log('get correct response');
 
                 return true
             }
             console.log(res, 'other status code');
+            return filterErrorResponse(filterErrorResponse)
         })
         .map(res => res.response)
 }
@@ -84,28 +89,6 @@ export const allFinishedFor = (arr) => {
     return Observable
         .forkJoin(obsArr)
         .catch(e => Observable.of(e))
-        .filter(res => {
-            store$
-                .updateStore
-                .next({loading: false})
-            if (res.status === 403) {
-                console.log('get 403 response')
-                return false
-            }
-            if (res.status === 404) {
-                console.log('get 404 response')
-                return false
-            }
-            if (res.status >= 500) {
-                console.log('server error');
-                return false
-            }
-            if (res.status === 0) {
-                console.log('timeout issue');
-                return false
-            }
-
-            return true
-        })
+        .filter(filterErrorResponse)
         .map(arr => arr.map(item => item.response))
 }
