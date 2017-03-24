@@ -4,7 +4,6 @@ import {injectProps} from 'rx-reactstore'
 import RegistrationForm from './RegistrationForm'
 
 const selector = (state) => {
-    // console.log(state);
     return ({user: state.store.user, userState: state.store.userState})
 };
 

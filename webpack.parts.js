@@ -4,6 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 const cssnano = require('cssnano')
 
 exports.devServer = function ({host, port}) {
@@ -202,7 +203,8 @@ exports.minifyJavaScript = function ({useSourceMap}) {
                     compress: {
                         warnings: false
                     }
-                })
+                }),
+            new CompressionPlugin({asset: "[path].gz[query]", algorithm: "gzip", test: /\.js$|\.css$|\.html$/, threshold: 10240, minRatio: 0.8})
         ]
     };
 };
