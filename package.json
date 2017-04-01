@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --env development",
-    "build": "webpack --env production --progress",
+    "start": "webpack-dashboard -- webpack-dev-server --env development",
+    "build": "webpack-dashboard -- webpack --env production --progress",
     "state": "webpack --json > stats.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -49,6 +49,7 @@
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^2.2.1",
+    "webpack-dashboard": "^0.3.0",
     "webpack-dev-server": "^2.3.0",
     "webpack-merge": "^2.6.1"
   },

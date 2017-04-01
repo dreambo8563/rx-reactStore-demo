@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackTemplate = require('html-webpack-template');
+const DashboardPlugin = require('webpack-dashboard/plugin');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 
@@ -30,7 +31,7 @@ const common = merge([
                 template: HtmlWebpackTemplate, title: 'demo', appMountId: 'app', // Generate #app where to mount
                 mobile: true, // Scale page on mobile
                 inject: false, // html-webpack-template requires this to work
-            })],
+            }),new DashboardPlugin()],
         resolve: {
             extensions: [
                 '.js', '.jsx', '.css'
