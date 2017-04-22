@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {Spin} from 'antd';
+import {ActivityIndicator} from 'antd-mobile';
 import s from './AppLayout.css'
 import {injectProps} from 'rx-reactstore'
 
@@ -17,13 +17,10 @@ class AppLayout extends Component {
         const {loading, children} = this.props
         return (
             <div className='redButton'>
-                layout herer match {children}
-                {loading}
+                {children}
+
                 {loading
-                    ? < Spin className = {
-                        s.loading
-                    }
-                    size = 'large' />
+                    ? (<ActivityIndicator size='large' className={s.loading}/>)
                     : undefined}
 
             </div>

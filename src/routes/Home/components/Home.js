@@ -1,8 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router'
+import {Flex, WhiteSpace} from 'antd-mobile';
 
-// const selector1 = (state) => {     console.log(state, 'app');     return
-// ({itemsSelected: state.subStore}) }; @injectProps(selector1)
 class App extends Component {
     static propTypes = {
         children: PropTypes.node
@@ -10,8 +9,14 @@ class App extends Component {
     render() {
         return (
             <div>
-                app comp {this.props.children}
-                <Link to={`/users`}>hahha</Link>
+                <Flex direction='column'>
+                    <Flex.Item>
+                        <Flex justify='justify'>
+                            <div>企业基本信息</div>
+                        </Flex>
+                    </Flex.Item>
+                    <WhiteSpace size='lg'/>
+                </Flex>
             </div>
         );
     }

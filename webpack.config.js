@@ -34,7 +34,7 @@ const common = merge([
             }),new DashboardPlugin()],
         resolve: {
             extensions: [
-                '.js', '.jsx', '.css'
+               '.web.js', '.js', '.jsx', '.css',
             ],
             alias: {
                 shared: path.resolve(__dirname, 'src/appSettings'),

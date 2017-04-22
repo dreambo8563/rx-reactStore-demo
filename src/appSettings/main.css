@@ -1,9 +1,14 @@
  /*color & font or other global styles*/
-body {
-    background: cornsilk;
-    display: flex;
-}
 
-:global(.redButton) {
-    background: yellowgreen;
-}
+ body {
+     background: cornsilk;
+     display: flex;
+ }
+
+ :global(.redButton) {
+     background: yellowgreen;
+ }
+
+ :global(#app) {
+     width: 100%
+ }
