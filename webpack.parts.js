@@ -108,9 +108,6 @@ exports.loadImages = function ({include, exclude, options} = {}) {
                         loader: 'url-loader',
                         options
                     }
-                }, {
-                    test: /\.svg$/,
-                    use: 'file-loader'
                 }
             ]
         }
@@ -118,12 +115,18 @@ exports.loadImages = function ({include, exclude, options} = {}) {
 };
 
 exports.loadFonts = function ({include, exclude, options} = {}) {
+    const svgDirs = [
+        require
+            .resolve('antd-mobile')
+            .replace(/warn\.js$/, ''), // 1. 属于 antd-mobile 内置 svg 文件
+        // path.resolve(__dirname, 'src/my-project-svg-foler'),  // 2. 自己私人的 svg 存放目录
+    ];
     return {
         module: {
             rules: [
                 {
                     // Capture eot, ttf, svg, woff, and woff2
-                    test: /\.(woff2?|ttf|svg|eot)(\?v=\d+\.\d+\.\d+)?$/,
+                    test: /\.(woff2?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
                     include,
                     exclude,
 
@@ -131,6 +134,10 @@ exports.loadFonts = function ({include, exclude, options} = {}) {
                         loader: 'file-loader',
                         options
                     }
+                }, {
+                    test: /\.svg$/,
+                    use: 'svg-sprite-loader',
+                    include: svgDirs, // 把 svgDirs 路径下的所有 svg 文件交给 svg-sprite-loader 插件处理
                 }
             ]
         }

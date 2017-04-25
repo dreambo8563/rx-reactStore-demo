@@ -89,7 +89,11 @@ class App extends Component {
                             taxiSingleSave: (parseFloat(value.taxiConsume) / parseFloat(value.taxiTickets) * 0.2).toFixed(2),
                             taxiSaveCount: (parseFloat(value.taxiTickets) * 0.05).toFixed(2),
                             cheapReminderAffectCount: (parseFloat(value.flightTickets) * 0.25).toFixed(2),
-                            aheadReminderAffectCount: (parseFloat(value.flightTickets) * 0.25).toFixed(2)
+                            aheadReminderAffectCount: (parseFloat(value.flightTickets) * 0.25).toFixed(2),
+                            flightTimesLimitedSaveCount: (parseFloat(value.flightTickets) * 0.06).toFixed(2),
+                            taxiLocationSaveCount: (parseFloat(value.taxiTickets) * 0.15).toFixed(2),
+                            flightTimesLimitedSingleSave: (parseFloat(value.flightConsume) / parseFloat(value.flightTickets)).toFixed(2),
+                            taxiLocationSingleSave: (parseFloat(value.taxiConsume) / parseFloat(value.taxiTickets)).toFixed(2)
                         })
                     } else {
                         changeHomeProps({
@@ -107,7 +111,11 @@ class App extends Component {
                             taxiSingleSave: (parseFloat(value.taxiPrice) * 0.2).toFixed(2),
                             taxiSaveCount: (parseFloat(value.taxiConsume) / parseFloat(value.taxiPrice) * 0.05).toFixed(2),
                             cheapReminderAffectCount: (parseFloat(value.flightConsume) / parseFloat(value.flightPrice) * 0.25).toFixed(2),
-                            aheadReminderAffectCount: (parseFloat(value.flightConsume) / parseFloat(value.flightPrice) * 0.25).toFixed(2)
+                            aheadReminderAffectCount: (parseFloat(value.flightConsume) / parseFloat(value.flightPrice) * 0.25).toFixed(2),
+                            flightTimesLimitedSaveCount: (parseFloat(value.flightConsume) / parseFloat(value.flightPrice) * 0.06).toFixed(2),
+                            taxiLocationSaveCount: (parseFloat(value.taxiConsume) / parseFloat(value.taxiPrice) * 0.15).toFixed(2),
+                            flightTimesLimitedSingleSave: parseFloat(value.flightPrice).toFixed(2),
+                            taxiLocationSingleSave: parseFloat(value.taxiPrice).toFixed(2)
                         })
                     }
                     browserHistory.push('/control')

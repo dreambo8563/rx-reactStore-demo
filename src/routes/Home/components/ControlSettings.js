@@ -1,5 +1,12 @@
 import React, {Component, PropTypes} from 'react';
-import {Button, List, Switch, WhiteSpace, WingBlank} from 'antd-mobile';
+import {
+    Button,
+    List,
+    Switch,
+    WhiteSpace,
+    WingBlank,
+    Icon
+} from 'antd-mobile';
 import {browserHistory} from 'react-router';
 import {createForm} from 'rc-form';
 import s from './ControlSettings.css'
@@ -30,6 +37,7 @@ class ControlSettings extends Component {
                     errorRefs[Object.keys(errorRefs)[0]].focus()
                 } else {
                     console.log(value);
+                    browserHistory.push('/summary')
                 }
             });
     }
@@ -41,10 +49,13 @@ class ControlSettings extends Component {
         return (
             <div>
                 <WingBlank>
-                    
+
                     <div onClick={:: this.goConfig} className={s.nav}>
-                        <img className={s.rightSpace} src={settingIcon} alt="settingIcon"/>
-                        管控节省参数设置
+                        <div className={s.flexContainer}>
+                            <img className={s.rightSpace} src={settingIcon} alt="settingIcon"/>
+                            管控节省参数设置
+                        </div>
+                        <Icon type='right'/>
                     </div>
                 </WingBlank>
                 <WhiteSpace/>
@@ -53,14 +64,14 @@ class ControlSettings extends Component {
                     <List.Item
                         extra={< Switch {
                         ...getFieldProps('flightCabinLevel', {
-                            initialValue: false,
+                            initialValue: true,
                             valuePropName: 'checked'
                         })
                     } />}>限制舱位级别</List.Item>
                     <List.Item
                         extra={< Switch {
                         ...getFieldProps('flightDiscount', {
-                            initialValue: false,
+                            initialValue: true,
                             valuePropName: 'checked'
                         })
                     } />}>限制最高折扣/价格</List.Item>
@@ -69,7 +80,7 @@ class ControlSettings extends Component {
                     <List.Item
                         extra={< Switch {
                         ...getFieldProps('hotelNightPriceLimit', {
-                            initialValue: false,
+                            initialValue: true,
                             valuePropName: 'checked'
                         })
                     } />}>限制间夜价金额</List.Item>
@@ -78,7 +89,7 @@ class ControlSettings extends Component {
                     <List.Item
                         extra={< Switch {
                         ...getFieldProps('trainSeatLevel', {
-                            initialValue: false,
+                            initialValue: true,
                             valuePropName: 'checked'
                         })
                     } />}>限制席别</List.Item>
@@ -87,21 +98,21 @@ class ControlSettings extends Component {
                     <List.Item
                         extra={< Switch {
                         ...getFieldProps('taxiAvailabelTime', {
-                            initialValue: false,
+                            initialValue: true,
                             valuePropName: 'checked'
                         })
                     } />}>设置可用时间</List.Item>
                     <List.Item
                         extra={< Switch {
                         ...getFieldProps('taxiAvailabelLocation', {
-                            initialValue: false,
+                            initialValue: true,
                             valuePropName: 'checked'
                         })
                     } />}>限制上车位置</List.Item>
                     <List.Item
                         extra={< Switch {
                         ...getFieldProps('taxiAvailabelType', {
-                            initialValue: false,
+                            initialValue: true,
                             valuePropName: 'checked'
                         })
                     } />}>限制用车车型</List.Item>
@@ -110,14 +121,14 @@ class ControlSettings extends Component {
                     <List.Item
                         extra={< Switch {
                         ...getFieldProps('cheapReminder', {
-                            initialValue: false,
+                            initialValue: true,
                             valuePropName: 'checked'
                         })
                     } />}>最低价提醒</List.Item>
                     <List.Item
                         extra={< Switch {
                         ...getFieldProps('aheadReminder', {
-                            initialValue: false,
+                            initialValue: true,
                             valuePropName: 'checked'
                         })
                     } />}>提前预订天数提醒
@@ -132,7 +143,7 @@ class ControlSettings extends Component {
                     <List.Item
                         extra={< Switch {
                         ...getFieldProps('highWaySuggest', {
-                            initialValue: false,
+                            initialValue: true,
                             valuePropName: 'checked'
                         })
                     } />}>高铁推荐

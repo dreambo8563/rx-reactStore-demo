@@ -14,10 +14,8 @@ export const homeState = {
     trainPrice: undefined, // 火车单张平均票价
     trainTickets: undefined, // 单月购买火车票张数
     travelerNum: undefined, // 出差人数
-    total: undefined, // 月消费总数
-
-    // config page
-    dReminderAffectCount: undefined,
+    // total: undefined, // 月消费总数 config page
+    aheadReminderAffectCount: undefined,
     cheapReminderAffectCount: undefined,
     finSaveTime: undefined,
     flightAd: undefined,
@@ -34,5 +32,7 @@ export const homeState = {
     tieSaveTime: undefined,
     trainAd: undefined,
     trainSaveCount: undefined,
-    trainSingleSave: undefined
+    trainSingleSave: undefined,
+    slideWithAheadFlight: 15,
+    slideWithLowFlight: 15
 }

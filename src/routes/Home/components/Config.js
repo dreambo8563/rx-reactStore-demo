@@ -57,7 +57,7 @@ class Config extends Component {
 
                     errorRefs[Object.keys(errorRefs)[0]].focus()
                 } else {
-                    console.log(value);
+                    console.log(value, 'config');
                     changeHomeProps({
                         ...this.props.homeState,
                         ...value
@@ -114,6 +114,14 @@ class Config extends Component {
                         labelNumber={8}
                         {...getFieldProps('trainSaveCount', { rules: [{required: true, message: '火车票节省张数'}], onChange:(val) => this.onChange('trainSaveCount', val), initialValue:homeState.trainSaveCount })}>节省张数</InputItem>
                 </List>
+                <List renderHeader={() => '用车 金额/等级限制节省'}>
+                    <InputItem
+                        labelNumber={8}
+                        {...getFieldProps('taxiSingleSave', { rules: [{required: true, message: '用车单张节省数必填'}], onChange:(val) => this.onChange('taxiSingleSave', val), initialValue:homeState.taxiSingleSave })}>单张节省(元)</InputItem>
+                    <InputItem
+                        labelNumber={8}
+                        {...getFieldProps('taxiSaveCount', { rules: [{required: true, message: '用车节省张数'}], onChange:(val) => this.onChange('taxiSaveCount', val), initialValue:homeState.taxiSaveCount})}>节省张数</InputItem>
+                </List>
                 <List renderHeader={() => '机票 次数/时间限制节省'}>
                     <InputItem
                         labelNumber={8}
@@ -122,14 +130,15 @@ class Config extends Component {
                         labelNumber={8}
                         {...getFieldProps('flightTimesLimitedSaveCount', { rules: [{required: true, message: '节省张数'}], onChange:(val) => this.onChange('flightTimesLimitedSaveCount', val), initialValue:homeState.flightTimesLimitedSaveCount })}>节省张数</InputItem>
                 </List>
-                <List renderHeader={() => '用车 时间/位置/车型限制节省'}>
+                <List renderHeader={() => '用车 时间/位置限制'}>
                     <InputItem
                         labelNumber={8}
-                        {...getFieldProps('taxiSingleSave', { rules: [{required: true, message: '用车单张节省数必填'}], onChange:(val) => this.onChange('taxiSingleSave', val), initialValue:homeState.taxiSingleSave })}>单张节省(元)</InputItem>
+                        {...getFieldProps('taxiLocationSingleSave', { rules: [{required: true, message: '用车单张节省数必填'}], onChange:(val) => this.onChange('taxiLocationSingleSave', val), initialValue:homeState.taxiLocationSingleSave })}>单张节省(元)</InputItem>
                     <InputItem
                         labelNumber={8}
-                        {...getFieldProps('taxiSaveCount', { rules: [{required: true, message: '用车节省张数'}] , onChange:(val) => this.onChange('taxiSaveCount', val), initialValue:homeState.taxiSaveCount})}>节省张数</InputItem>
+                        {...getFieldProps('taxiLocationSaveCount', { rules: [{required: true, message: '用车节省张数'}], onChange:(val) => this.onChange('taxiLocationSaveCount', val), initialValue:homeState.taxiLocationSaveCount})}>节省张数</InputItem>
                 </List>
+
                 <List renderHeader={() => '最低价提醒节省'}>
                     <WingBlank
                         style={{
@@ -189,28 +198,28 @@ class Config extends Component {
                 <List renderHeader={() => '价格优势'}>
                     <InputItem
                         labelNumber={8}
-                        {...getFieldProps('flightAd', { rules: [{required: true, message: '机票优势必填'}],onChange:(val) => this.onChange('flightAd', val), initialValue:'1' })}>机票优势(%)</InputItem>
+                        {...getFieldProps('flightAd', { rules: [{required: true, message: '机票优势必填'}], onChange:(val) => this.onChange('flightAd', val), initialValue:'1' })}>机票优势(%)</InputItem>
                     <InputItem
                         labelNumber={8}
-                        {...getFieldProps('hotelAd', { rules: [{required: true, message: '酒店优势必填'}],onChange:(val) => this.onChange('hotelAd', val), initialValue:'1' })}>酒店优势(%)</InputItem>
+                        {...getFieldProps('hotelAd', { rules: [{required: true, message: '酒店优势必填'}], onChange:(val) => this.onChange('hotelAd', val), initialValue:'1' })}>酒店优势(%)</InputItem>
                     <InputItem
                         labelNumber={8}
-                        {...getFieldProps('trainAd', {rules: [{required: true, message: '火车优势必填'}],onChange:(val) => this.onChange('trainAd', val), initialValue:'5'})}>火车优势(%)</InputItem>
+                        {...getFieldProps('trainAd', {rules: [{required: true, message: '火车优势必填'}], onChange:(val) => this.onChange('trainAd', val), initialValue:'5'})}>火车优势(%)</InputItem>
                 </List>
                 <List renderHeader={() => '耗时设置'}>
                     <InputItem
                         labelNumber={8}
-                        {...getFieldProps('tieSaveTime', { rules: [{required: true, message: '贴票报销必填'}],onChange:(val) => this.onChange('tieSaveTime', val), initialValue:'5' })}>贴票报销(min)</InputItem>
+                        {...getFieldProps('tieSaveTime', { rules: [{required: true, message: '贴票报销必填'}], onChange:(val) => this.onChange('tieSaveTime', val), initialValue:'5' })}>贴票报销(min)</InputItem>
                     <InputItem
                         labelNumber={8}
-                        {...getFieldProps('finSaveTime', { rules: [{required: true, message: '财务审核必填'}],onChange:(val) => this.onChange('finSaveTime', val), initialValue:'8' })}>财务审核(min)</InputItem>
+                        {...getFieldProps('finSaveTime', { rules: [{required: true, message: '财务审核必填'}], onChange:(val) => this.onChange('finSaveTime', val), initialValue:'8' })}>财务审核(min)</InputItem>
 
                 </List>
                 <List renderHeader={() => '其他参数'}>
                     <InputItem
                         labelNumber={8}
                         type='number'
-                        {...getFieldProps('salary', { rules: [{required: true, message: '月人均工资必填'}],onChange:(val) => this.onChange('salary', val), initialValue:'14400' })}>月人均工资(元)</InputItem>
+                        {...getFieldProps('salary', { rules: [{required: true, message: '月人均工资必填'}], onChange:(val) => this.onChange('salary', val), initialValue:'14400' })}>月人均工资(元)</InputItem>
                 </List>
                 <WhiteSpace size='lg'/>
                 <Button onClick={:: this.submit} type='primary'>保存</Button>

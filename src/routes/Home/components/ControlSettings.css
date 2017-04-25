@@ -7,9 +7,14 @@
     font-family: PingFangSC-Semibold;
     padding: 20px;
     display: flex;
-    align-items: center;
+    align-content: center;
+    justify-content: space-between
 }
 
+.flexContainer{
+    display: flex;
+    align-items: center
+}
 .rightSpace{
     margin-right:20px
 }

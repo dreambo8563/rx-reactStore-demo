@@ -50,3 +50,21 @@ export const Config = () => ({
         }, 'Config')
     }
 })
+
+export const Summary = () => ({
+    /*  Async getComponent is only invoked when route matches   */
+    path: 'summary',
+    getComponent(nextState, cb) {
+        /*  Webpack - use 'require.ensure' to create a split point
+        and embed an async module loader (jsonp) when bundling   */
+        require.ensure([], (require) => {
+            /*  Webpack - use require callback to define
+          dependencies for bundling   */
+            const Summary = require('./components/Summary').default
+
+            cb(null, Summary)
+
+            /* Webpack named bundle   */
+        }, 'Summary')
+    }
+})
