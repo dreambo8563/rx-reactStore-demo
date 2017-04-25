@@ -194,7 +194,7 @@ class App extends Component {
                             <InputItem value={total} editable={false}>月消费</InputItem>
                         </List>
                         <List renderHeader={() => '附加信息(选填)'}>
-                            <Tabs defaultActiveKey='1' onChange={:: this.callback}>
+                            <Tabs swipeable={false} defaultActiveKey='1' onChange={:: this.callback}>
                                 <TabPane tab='填写票数/次数' key='1'>
                                     {this.state.currentTab == '1'
                                         ? (

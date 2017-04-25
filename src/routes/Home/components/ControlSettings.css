@@ -11,12 +11,17 @@
     justify-content: space-between
 }
 
-.flexContainer{
+.flexContainer {
     display: flex;
-    align-items: center
+    align-items: center;
 }
-.rightSpace{
-    margin-right:20px
+
+.flexItem {
+    flex: 1
+}
+
+.rightSpace {
+    margin-right: 20px
 }
 
 .note {
@@ -24,4 +29,37 @@
     font-family: PingFangSC-Regular;
     font-size: 20px;
     color: #999999;
+}
+
+.columnFlexContainer {
+    display: flex;
+    flex-direction: column
+}
+
+.tableTitle {
+    font-family: PingFangSC-Medium;
+    font-size: 28px;
+    padding: 20px;
+    background-color: white;
+    color: #666666;
+}
+
+.tableItemHeader {
+    font-family: PingFangSC-Regular;
+    font-size: 28px;
+    color: #BBBBBB;
+}
+
+.number {
+    font-family: PingFangSC-Light;
+    font-size: 48px;
+    color: #666666;
+}
+.cell{
+    padding: 20px;
+    background-color: white;
+    border:solid 1px #BBBBBB;
+}
+.opacity{
+    opacity: 0
 }
