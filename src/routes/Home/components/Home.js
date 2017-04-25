@@ -87,7 +87,9 @@ class App extends Component {
                             trainSingleSave: (parseFloat(value.trainConsume) / parseFloat(value.trainTickets) * 0.3).toFixed(2),
                             trainSaveCount: (parseFloat(value.trainTickets) * 0.07).toFixed(2),
                             taxiSingleSave: (parseFloat(value.taxiConsume) / parseFloat(value.taxiTickets) * 0.2).toFixed(2),
-                            taxiSaveCount: (parseFloat(value.taxiTickets) * 0.05).toFixed(2)
+                            taxiSaveCount: (parseFloat(value.taxiTickets) * 0.05).toFixed(2),
+                            cheapReminderAffectCount: (parseFloat(value.flightTickets) * 0.25).toFixed(2),
+                            aheadReminderAffectCount: (parseFloat(value.flightTickets) * 0.25).toFixed(2)
                         })
                     } else {
                         changeHomeProps({
@@ -103,7 +105,9 @@ class App extends Component {
                             trainSingleSave: (parseFloat(value.trainPrice) * 0.3).toFixed(2),
                             trainSaveCount: (parseFloat(value.trainConsume) / parseFloat(value.trainPrice) * 0.07).toFixed(2),
                             taxiSingleSave: (parseFloat(value.taxiPrice) * 0.2).toFixed(2),
-                            taxiSaveCount: (parseFloat(value.taxiConsume) / parseFloat(value.taxiPrice) * 0.05).toFixed(2)
+                            taxiSaveCount: (parseFloat(value.taxiConsume) / parseFloat(value.taxiPrice) * 0.05).toFixed(2),
+                            cheapReminderAffectCount: (parseFloat(value.flightConsume) / parseFloat(value.flightPrice) * 0.25).toFixed(2),
+                            aheadReminderAffectCount: (parseFloat(value.flightConsume) / parseFloat(value.flightPrice) * 0.25).toFixed(2)
                         })
                     }
                     browserHistory.push('/control')

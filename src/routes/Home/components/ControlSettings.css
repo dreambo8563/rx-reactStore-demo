@@ -3,6 +3,20 @@
     box-shadow: 0 0 4px 0 rgba(144, 121, 86, 0.40);
     border-radius: 8px;
     color: #907956;
+    font-size: 24px;
     font-family: PingFangSC-Semibold;
     padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.rightSpace{
+    margin-right:20px
+}
+
+.note {
+    margin-left: 18px;
+    font-family: PingFangSC-Regular;
+    font-size: 20px;
+    color: #999999;
 }

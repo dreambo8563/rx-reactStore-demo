@@ -1,15 +1,9 @@
 import React, {Component, PropTypes} from 'react';
-import {
-    Button,
-    List,
-    Switch,
-    WhiteSpace,
-    InputItem,
-    WingBlank
-} from 'antd-mobile';
+import {Button, List, Switch, WhiteSpace, WingBlank} from 'antd-mobile';
 import {browserHistory} from 'react-router';
 import {createForm} from 'rc-form';
 import s from './ControlSettings.css'
+import settingIcon from '../img/setting.png'
 
 class ControlSettings extends Component {
     static propTypes = {
@@ -47,7 +41,9 @@ class ControlSettings extends Component {
         return (
             <div>
                 <WingBlank>
+                    
                     <div onClick={:: this.goConfig} className={s.nav}>
+                        <img className={s.rightSpace} src={settingIcon} alt="settingIcon"/>
                         管控节省参数设置
                     </div>
                 </WingBlank>
@@ -124,21 +120,28 @@ class ControlSettings extends Component {
                             initialValue: false,
                             valuePropName: 'checked'
                         })
-                    } />}>提前预订天数提醒</List.Item>
-                    <div>提前天数判定开启后，如用户未按提前天数预订，将弹出提醒
-                    </div>
-                    <List renderHeader={() => '其他管控'}>
-                        <List.Item
-                            extra={< Switch {
-                            ...getFieldProps('highWaySuggest', {
-                                initialValue: false,
-                                valuePropName: 'checked'
-                            })
-                        } />}>高铁推荐</List.Item>
-                        <div>开启后将推荐预订高铁
-                        </div>
-                    </List>
+                    } />}>提前预订天数提醒
+
+                    </List.Item>
+
                 </List>
+                <div className={s.note}>提前天数判定开启后，如用户未按提前天数预订，将弹出提醒
+                </div>
+                <WhiteSpace size='lg'/>
+                <List renderHeader={() => '其他管控'}>
+                    <List.Item
+                        extra={< Switch {
+                        ...getFieldProps('highWaySuggest', {
+                            initialValue: false,
+                            valuePropName: 'checked'
+                        })
+                    } />}>高铁推荐
+
+                    </List.Item>
+                </List>
+                <div className={s.note}>开启后将推荐预订高铁
+                </div>
+
                 <WhiteSpace size='lg'/>
                 <Button onClick={:: this.submit} type='primary'>开始计算</Button>
                 <WhiteSpace size='lg'/>

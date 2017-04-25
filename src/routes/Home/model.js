@@ -12,7 +12,27 @@ export const homeState = {
     taxiTickets: undefined, // 单月用车次数
     trainConsume: undefined, // 单月火车消费金额
     trainPrice: undefined, // 火车单张平均票价
-    trainTickets: undefined,  // 单月购买火车票张数
+    trainTickets: undefined, // 单月购买火车票张数
     travelerNum: undefined, // 出差人数
-    total:undefined // 月消费总数
+    total: undefined, // 月消费总数
+
+    // config page
+    dReminderAffectCount: undefined,
+    cheapReminderAffectCount: undefined,
+    finSaveTime: undefined,
+    flightAd: undefined,
+    flightSaveCount: undefined,
+    flightSingleSave: undefined,
+    flightTimesLimitedSaveCount: undefined,
+    flightTimesLimitedSingleSave: undefined,
+    hotelAd: undefined,
+    hotelSaveCount: undefined,
+    hotelSingleSave: undefined,
+    salary: undefined,
+    taxiSaveCount: undefined,
+    taxiSingleSave: undefined,
+    tieSaveTime: undefined,
+    trainAd: undefined,
+    trainSaveCount: undefined,
+    trainSingleSave: undefined
 }
