@@ -29,7 +29,8 @@ const common = merge([
         },
         plugins: [new HtmlWebpackPlugin({
                 template: HtmlWebpackTemplate, title: 'demo', appMountId: 'app', // Generate #app where to mount
-                mobile: true, // Scale page on mobile
+                mobile: false, // Scale page on mobile
+                meta:[{name:'viewport',content:'width=device-width,user-scalable=no,initialscale=0.5,maximum-scale=0.5,minimumscale=0.5'}],
                 inject: false, // html-webpack-template requires this to work
             }),new DashboardPlugin()],
         resolve: {

@@ -5,10 +5,56 @@
      display: flex;
  }
 
- :global(.redButton) {
-     background: yellowgreen;
- }
-
  :global(#app) {
      width: 100%
+ }
+
+ :global(.am-list-header) {
+     font-family: PingFangSC-Regular;
+     /*font-size: 14px!important;*/
+     color: #666666 !important;
+ }
+
+ :global(.am-list-item .am-input-label) {
+     font-family: PingFangSC-Regular;
+     /*font-size: 16px !important;*/
+     color: #333333 !important;
+ }
+
+ :global(.am-list-item .am-input-control input) {
+     font-family: PingFangSC-Regular;
+     /*font-size: 16px !important;*/
+     color: #BBBBBB!important;
+ }
+
+ /*:global(.am-list-item) {
+     height: auto !important;
+     min-height: auto !important;
+ }*/
+
+ /*:global(.am-toast-notice-content .am-toast-text) {
+     font-size: 18px
+ }*/
+
+ :global(.am-button-primary) {
+     font-family: PingFangSC-Regular;
+     /*font-size: 18px!important;*/
+     color: #FFFFFF!important;
+     /*height: 1rem!important;*/
+     /*line-height: 1rem!important;*/
+     background: #F09A37!important;
+     border-radius: 8px!important;
+     border: 1PX solid #F09A37!important;
+ }
+
+ :global(.am-tabs-bar .am-tabs-tab) {
+     font-family: PingFangSC-Regular;
+     /*font-size: 16px!important;
+     height: 0.8rem!important;
+     line-height: 0.8rem!important;*/
+     color: #999999!important;
+ }
+
+ :global(.am-tabs-ink-bar) {
+     background: #F09A37!important;
  }

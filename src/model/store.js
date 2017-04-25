@@ -1,46 +1,36 @@
 import {createStore, store} from 'rx-reactstore'
-import {userState} from 'modules/User/model'
+import {homeState} from 'modules/Home/model'
 
 export const initailStore = {
-    loading: false,
-    a: 123,
-    b: [
-        1, 2, 3, 4
-    ],
-    c: {
-        xx: 'ok'
-    },
-    user: {
-        name: 'name1111'
-    }
+    loading: false
 }
 
 export const store$ = createStore({
     ...initailStore,
-    userState
+    homeState
 }, 'store')
 
-store$
-    .a
-    .map(v => ({a: v}))
-    .subscribe(store$.updateStore)
+// store$
+//     .a
+//     .map(v => ({a: v}))
+//     .subscribe(store$.updateStore)
 
-store$
-    .b
-    .map(v => ({b: v}))
-    .subscribe(store$.updateStore)
+// store$
+//     .b
+//     .map(v => ({b: v}))
+//     .subscribe(store$.updateStore)
 
-store$
-    .c
-    .xx
-    .map(v => ({xx: v}))
-    .subscribe(store$.c.updateStore)
+// store$
+//     .c
+//     .xx
+//     .map(v => ({xx: v}))
+//     .subscribe(store$.c.updateStore)
 
-store$
-    .user
-    .name
-    .map(v => ({name: v}))
-    .subscribe(store$.c.updateStore)
+// store$
+//     .user
+//     .name
+//     .map(v => ({name: v}))
+//     .subscribe(store$.c.updateStore)
 
 export function getStore() {
     return store
