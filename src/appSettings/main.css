@@ -58,3 +58,7 @@
  :global(.am-tabs-ink-bar) {
      background: #F09A37!important;
  }
+
+ :global(.am-switch input[type="checkbox"]:checked + .checkbox){
+     background: #F09A37!important;
+ }

@@ -144,7 +144,7 @@ class App extends Component {
                     trainTickets = (Number(value) * 3.005).toFixed(2)
                 }
                 if (homeState.employeeNum) {
-                    taxiTickets = (Number(homeState.employeeNum) * 22.00015).toFixed(2)
+                    taxiTickets = (Number(homeState.employeeNum) * 22 * 0.0015).toFixed(2)
                 }
                 if (homeState.flightConsume != undefined && !!flightTickets) {
                     avgFlight = Number(parseFloat(homeState.flightConsume) / parseFloat(flightTickets)).toFixed(2)
