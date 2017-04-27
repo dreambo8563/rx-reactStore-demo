@@ -17,7 +17,7 @@ class ControlSettings extends Component {
         form: PropTypes.any
     }
     goConfig() {
-        browserHistory.push('/config')
+        browserHistory.push('/calculator/config')
     }
     submit() {
         this
@@ -37,7 +37,7 @@ class ControlSettings extends Component {
                     errorRefs[Object.keys(errorRefs)[0]].focus()
                 } else {
                     console.log(value);
-                    browserHistory.push('/summary')
+                    browserHistory.push('/calculator/summary')
                 }
             });
     }
@@ -52,7 +52,7 @@ class ControlSettings extends Component {
 
                     <div onClick={:: this.goConfig} className={s.nav}>
                         <div className={s.flexContainer}>
-                            <img className={s.rightSpace} src={settingIcon} alt="settingIcon"/>
+                            <img className={s.rightSpace} src={settingIcon} alt='settingIcon'/>
                             管控节省参数设置
                         </div>
                         <Icon type='right'/>

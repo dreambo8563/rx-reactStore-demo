@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 
-import {Tabs, WhiteSpace} from 'antd-mobile';
+import {Tabs, Icon, WhiteSpace} from 'antd-mobile';
 import {injectProps} from 'rx-reactstore'
 import cx from 'classnames'
 import {
@@ -22,44 +22,6 @@ function handleTabClick(key) {
     console.log('onTabClick', key);
 }
 
-const data = [
-    {
-        name: 'Page A',
-        uv: 4000,
-        pv: 2400,
-        amt: 2400
-    }, {
-        name: 'Page B',
-        uv: 3000,
-        pv: 1398,
-        amt: 2210
-    }, {
-        name: 'Page C',
-        uv: 2000,
-        pv: 9800,
-        amt: 2290
-    }, {
-        name: 'Page D',
-        uv: 2780,
-        pv: 3908,
-        amt: 2000
-    }, {
-        name: 'Page E',
-        uv: 1890,
-        pv: 4800,
-        amt: 2181
-    }, {
-        name: 'Page F',
-        uv: 2390,
-        pv: 3800,
-        amt: 2500
-    }, {
-        name: 'Page G',
-        uv: 3490,
-        pv: 4300,
-        amt: 2100
-    }
-];
 class StackedBarChart extends Component {
     static propTypes = {
         width: PropTypes.number,
@@ -73,8 +35,8 @@ class StackedBarChart extends Component {
                 data={this.props.data}
                 margin={{
                 top: 30,
-                right: 20,
-                left: 20,
+                right: 0,
+                left: 40,
                 bottom: 30
             }}>
                 <XAxis dataKey='name'/>
@@ -86,10 +48,10 @@ class StackedBarChart extends Component {
                     bottom: 2
                 }}
                     verticalAlign='bottom'/>
-                <Bar dataKey='规则管控' stackId='a' fill='#8884d8'/>
-                <Bar dataKey='提醒推荐' stackId='a' fill='#82ca9d'/>
-                <Bar dataKey='人力节省' stackId='a' fill='red'/>
-                <Bar dataKey='价格节省' stackId='a' fill='#ffffff'/>
+                <Bar dataKey='规则管控' stackId='a' fill='#EDBB55'/>
+                <Bar dataKey='提醒推荐' stackId='a' fill='#57B493'/>
+                <Bar dataKey='价格节省' stackId='a' fill='#92C6E4'/>
+                <Bar dataKey='人力节省' stackId='a' fill='#6293D5'/>
             </BarChart>
         );
     }
@@ -119,7 +81,7 @@ class Summary extends Component {
         const trainRule = (parseFloat(homeState.trainSingleSave) * parseFloat(homeState.trainSaveCount)).toFixed(2)
         const taxiRule = ((parseFloat(homeState.taxiSingleSave) * parseFloat(homeState.taxiSaveCount)) + (parseFloat(homeState.taxiLocationSingleSave) * parseFloat(homeState.taxiLocationSaveCount))).toFixed(2)
 
-        const flightReminder = ((parseFloat(homeState.cheapReminderAffectCount) * parseFloat(homeState.slideWithLowFlight) / 100) + (parseFloat(homeState.slideWithAheadFlight) * parseFloat(homeState.aheadReminderAffectCount) / 100)).toFixed(2)
+        const flightReminder = ((parseFloat(homeState.cheapReminderAffectCount) * parseFloat(homeState.slideWithLowFlight) * parseFloat(homeState.flightPrice) / 100) + (parseFloat(homeState.slideWithAheadFlight) * parseFloat(homeState.aheadReminderAffectCount) * parseFloat(homeState.flightPrice) / 100)).toFixed(2)
 
         const flightAd = (parseFloat(homeState.flightTickets) * parseFloat(homeState.flightPrice) * parseFloat(homeState.flightAd) / 100).toFixed(2)
         const hotelAd = (parseFloat(homeState.hotelTickets) * parseFloat(homeState.hotelPrice) * parseFloat(homeState.hotelAd) / 100).toFixed(2)
@@ -130,7 +92,7 @@ class Summary extends Component {
         const trainTime = parseInt(parseFloat(homeState.trainTickets) * (parseFloat(homeState.tieSaveTime) + parseFloat(homeState.finSaveTime)))
         const taxiTime = parseInt(parseFloat(homeState.taxiTickets) * (parseFloat(homeState.tieSaveTime) + parseFloat(homeState.finSaveTime)))
 
-        const width = window.screen.width
+        const width = window.screen.width - 40
         const data = [
             {
                 name: '机票',
@@ -161,19 +123,19 @@ class Summary extends Component {
         const yearData = [
             {
                 name: '机票',
-                '规则管控': (flighRule * 12),
+                '规则管控': parseFloat(flighRule * 12).toFixed(2),
                 '提醒推荐': (flightReminder * 12),
                 '人力节省': (flightTime * 12),
                 '价格节省': (flightAd * 12)
             }, {
                 name: '酒店',
-                '规则管控': (hotelRule * 12),
+                '规则管控': parseFloat(hotelRule * 12).toFixed(2),
                 '提醒推荐': 0,
                 '人力节省': (hotelTime * 12),
                 ad: (hotelAd * 12)
             }, {
                 name: '火车',
-                '规则管控': (trainRule * 12),
+                '规则管控': parseFloat(trainRule * 12).toFixed(2),
                 '提醒推荐': 0,
                 '人力节省': (trainTime * 12),
                 '价格节省': (trainAd * 12)
@@ -330,7 +292,10 @@ class Summary extends Component {
                             </div>
                         </div>
                         <WhiteSpace size='lg'/>
-                        <div>节省数据计算说明</div>
+                        <div className={s.explain}>
+                            节省数据计算说明
+                            <Icon type='right'/>
+                        </div>
                         <WhiteSpace size='lg'/>
                     </TabPane>
                     <TabPane tab='全年节省' key='2'>
@@ -432,7 +397,10 @@ class Summary extends Component {
                             </div>
                         </div>
                         <WhiteSpace size='lg'/>
-                        <div>节省数据计算说明</div>
+                        <div className={s.explain}>
+                            节省数据计算说明
+                            <Icon type='right'/>
+                        </div>
                         <WhiteSpace size='lg'/>
 
                     </TabPane>

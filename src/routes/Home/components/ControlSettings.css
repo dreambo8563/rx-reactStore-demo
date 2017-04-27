@@ -55,11 +55,22 @@
     font-size: 48px;
     color: #666666;
 }
-.cell{
+
+.cell {
     padding: 20px;
     background-color: white;
-    border:solid 1px #BBBBBB;
+    border: solid 1px #BBBBBB;
 }
-.opacity{
+
+.opacity {
     opacity: 0
+}
+
+.explain {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: PingFangSC-Medium;
+    font-size: 28px;
+    color: #6E8DAD;
 }
