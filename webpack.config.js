@@ -25,12 +25,12 @@ const common = merge([
         output: {
             path: PATHS.build,
             filename: '[name].[hash].js',
-            publicPath: './'
+            publicPath: '/'
         },
         plugins: [new HtmlWebpackPlugin({
                 template: HtmlWebpackTemplate, title: '省钱计算器', appMountId: 'app', // Generate #app where to mount
                 mobile: false, // Scale page on mobile
-                meta:[{name:'viewport',content:'width=device-width,user-scalable=no,initialscale=0.5,maximum-scale=0.5,minimumscale=0.5'}],
+                meta:[{name:'viewport',content:'width=device-width,user-scalable=no,initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5'}],
                 inject: false, // html-webpack-template requires this to work
             }),new DashboardPlugin()],
         resolve: {

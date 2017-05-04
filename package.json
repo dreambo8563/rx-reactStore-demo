@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dashboard -- webpack-dev-server --env development",
+    "start": "webpack-dev-server --env development",
     "build": "webpack-dashboard -- webpack --env production --progress",
     "state": "webpack --json > stats.json",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -62,7 +62,7 @@
     "react-dom": "^15.4.2",
     "react-router": "^3.0.2",
     "recharts": "^0.22.3",
-    "rx-reactstore": "^1.0.11",
+    "rx-reactstore": "^1.0.18",
     "rxjs": "^5.1.0"
   }
 }
