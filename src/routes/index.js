@@ -8,7 +8,7 @@ import NotFound from 'shared/NotFound'
 
 export const createRoutes = (store) => ([
     {
-        path: '/',
+        path: '/calculator',
         component: AppLayout,
         indexRoute: Home(),
         childRoutes: [Control(), Config(), Summary()]

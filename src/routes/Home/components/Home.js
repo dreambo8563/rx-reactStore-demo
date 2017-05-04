@@ -98,10 +98,10 @@ class App extends Component {
                     } else {
                         changeHomeProps({
                             ...value,
-                            flightTickets: (parseFloat(value.flightConsume) / parseFloat(value.flightPrice)).toFixed(2),
-                            hotelTickets: (parseFloat(value.hotelConsume) / parseFloat(value.hotelPrice)).toFixed(2),
-                            trainTickets: (parseFloat(value.trainConsume) / parseFloat(value.trainPrice)).toFixed(2),
-                            taxiTickets: (parseFloat(value.taxiConsume) / parseFloat(value.taxiPrice)).toFixed(2),
+                            flightTickets: Math.round(parseFloat(value.flightConsume) / parseFloat(value.flightPrice)),
+                            hotelTickets: Math.round(parseFloat(value.hotelConsume) / parseFloat(value.hotelPrice)),
+                            trainTickets: Math.round(parseFloat(value.trainConsume) / parseFloat(value.trainPrice)),
+                            taxiTickets: Math.round(parseFloat(value.taxiConsume) / parseFloat(value.taxiPrice)).toFixed(2),
                             flightSingleSave: (parseFloat(value.flightPrice) * 0.2).toFixed(2),
                             flightSaveCount: (parseFloat(value.flightConsume) / parseFloat(value.flightPrice) * 0.05).toFixed(2),
                             hotelSingleSave: (parseFloat(value.hotelPrice) * 0.2).toFixed(2),
@@ -139,12 +139,12 @@ class App extends Component {
                     avgTaxi
                 if (homeState.travelerNum) {
                     const value = homeState.travelerNum
-                    flightTickets = (Number(value) * 4.005).toFixed(2)
-                    hotelTickets = (Number(value) * 3.005).toFixed(2)
-                    trainTickets = (Number(value) * 3.005).toFixed(2)
+                    flightTickets = Math.round(Number(value) * 4.005)
+                    hotelTickets = Math.round(Number(value) * 3.005)
+                    trainTickets = Math.round(Number(value) * 3.005)
                 }
                 if (homeState.employeeNum) {
-                    taxiTickets = (Number(homeState.employeeNum) * 22 * 0.0015).toFixed(2)
+                    taxiTickets = Math.round(Number(homeState.employeeNum) * 22 * 0.0015)
                 }
                 if (homeState.flightConsume != undefined && !!flightTickets) {
                     avgFlight = Number(parseFloat(homeState.flightConsume) / parseFloat(flightTickets)).toFixed(2)
@@ -200,15 +200,19 @@ class App extends Component {
                                         ? (
                                             <div>
                                                 <InputItem
+                                                    labelNumber={8}
                                                     {...getFieldProps('flightTickets', { rules: [{required: true, message: '单月购买机票数必填'}], onChange:(val) => this.onChange('flightTickets', val), initialValue:homeState.flightTickets || flightTickets })}
                                                     placeholder='单月购买机票数'>机票张数</InputItem>
                                                 <InputItem
+                                                    labelNumber={8}
                                                     {...getFieldProps('hotelTickets', { rules: [{required: true, message: '单月入住酒店间夜数必填'}], initialValue:homeState.hotelTickets || hotelTickets })}
                                                     placeholder='单月入住酒店间夜数'>酒店间夜价数</InputItem>
                                                 <InputItem
+                                                    labelNumber={8}
                                                     placeholder='单月购买火车票张数'
                                                     {...getFieldProps('trainTickets', { rules: [{required: true, message: '单月购买火车票张数必填'}], initialValue:homeState.trainTickets || trainTickets })}>火车票张数</InputItem>
                                                 <InputItem
+                                                    labelNumber={8}
                                                     placeholder='单月用车次数'
                                                     {...getFieldProps('taxiTickets', { rules: [{required: true, message: '单月用车次数必填'}], initialValue:homeState.taxiTickets || taxiTickets})}>用车次数</InputItem>
                                             </div>
