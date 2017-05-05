@@ -75,7 +75,7 @@ class Summary extends Component {
 
     componentDidMount() {
         const {homeState} = this.props
-        console.log(homeState);
+        // console.log(homeState);
         const flighRule = ((parseFloat(homeState.flightSingleSave) * parseFloat(homeState.flightSaveCount)) + (parseFloat(homeState.flightTimesLimitedSingleSave) * parseFloat(homeState.flightTimesLimitedSaveCount))).toFixed(2)
         const hotelRule = (parseFloat(homeState.hotelSingleSave) * parseFloat(homeState.hotelSaveCount)).toFixed(2)
         const trainRule = (parseFloat(homeState.trainSingleSave) * parseFloat(homeState.trainSaveCount)).toFixed(2)
@@ -85,7 +85,7 @@ class Summary extends Component {
 
         const flightAd = (parseFloat(homeState.flightTickets) * parseFloat(homeState.flightPrice) * parseFloat(homeState.flightAd) / 100).toFixed(2)
         const hotelAd = (parseFloat(homeState.hotelTickets) * parseFloat(homeState.hotelPrice) * parseFloat(homeState.hotelAd) / 100).toFixed(2)
-        const trainAd = (parseFloat(homeState.trainTickets) * parseFloat(homeState.trainPrice) * parseFloat(homeState.trainAd) / 100).toFixed(2)
+        const trainAd = (parseFloat(homeState.trainTickets) * parseFloat(homeState.trainAd)).toFixed(2)
 
         const flightTime = parseInt(parseFloat(homeState.flightTickets) * (parseFloat(homeState.tieSaveTime) + parseFloat(homeState.finSaveTime)))
         const hotelTime = parseInt(parseFloat(homeState.hotelTickets) * (parseFloat(homeState.tieSaveTime) + parseFloat(homeState.finSaveTime)))
@@ -93,6 +93,7 @@ class Summary extends Component {
         const taxiTime = parseInt(parseFloat(homeState.taxiTickets) * (parseFloat(homeState.tieSaveTime) + parseFloat(homeState.finSaveTime)))
 
         const width = window.screen.width - 40
+        // console.log(trainAd);
         const data = [
             {
                 name: '机票',
@@ -105,7 +106,7 @@ class Summary extends Component {
                 '规则管控': hotelRule,
                 '提醒推荐': 0,
                 '人力节省': hotelTime,
-                ad: hotelAd
+                '价格节省': hotelAd
             }, {
                 name: '火车',
                 '规则管控': trainRule,

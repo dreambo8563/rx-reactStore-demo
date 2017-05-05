@@ -57,7 +57,7 @@ class Config extends Component {
 
                     errorRefs[Object.keys(errorRefs)[0]].focus()
                 } else {
-                    console.log(value, 'config');
+                    //  console.log(value, 'config');
                     changeHomeProps({
                         ...this.props.homeState,
                         ...value
@@ -148,6 +148,9 @@ class Config extends Component {
                         <div>
                             <p>最低价机票平均票价节省比例</p>
                             <SliderWithTooltip
+                                style={{
+                                width: '93%'
+                            }}
                                 defaultValue={15}
                                 min={0}
                                 max={100}
@@ -160,8 +163,12 @@ class Config extends Component {
                                 boxShadow: '0px 0px 8px 0px rgba(0,0,0,0.20)'
                             }}
                                 onChange={:: this.log('slideWithLowFlight')}/>
+                            <span
+                                style={{
+                                float: 'right',
+                                lineHeight: '0.5'
+                            }}>{homeState.slideWithLowFlight}%</span>
                         </div>
-
                     </WingBlank>
                     <InputItem
                         labelNumber={8}
@@ -176,6 +183,9 @@ class Config extends Component {
                         <div>
                             <p>提前预订带来的票价节省比例</p>
                             <SliderWithTooltip
+                                style={{
+                                width: '93%'
+                            }}
                                 defaultValue={15}
                                 min={0}
                                 max={100}
@@ -188,6 +198,11 @@ class Config extends Component {
                                 boxShadow: '0px 0px 8px 0px rgba(0,0,0,0.20)'
                             }}
                                 onChange={:: this.log('slideWithAheadFlight')}/>
+                            <span
+                                style={{
+                                float: 'right',
+                                lineHeight: '0.5'
+                            }}>{homeState.slideWithAheadFlight}%</span>
                         </div>
 
                     </WingBlank>
@@ -204,7 +219,7 @@ class Config extends Component {
                         {...getFieldProps('hotelAd', { rules: [{required: true, message: '酒店优势必填'}], onChange:(val) => this.onChange('hotelAd', val), initialValue:'1' })}>酒店优势(%)</InputItem>
                     <InputItem
                         labelNumber={8}
-                        {...getFieldProps('trainAd', {rules: [{required: true, message: '火车优势必填'}], onChange:(val) => this.onChange('trainAd', val), initialValue:'5'})}>火车优势(%)</InputItem>
+                        {...getFieldProps('trainAd', {rules: [{required: true, message: '火车优势必填'}], onChange:(val) => this.onChange('trainAd', val), initialValue:'5'})}>火车优势(元)</InputItem>
                 </List>
                 <List renderHeader={() => '耗时设置'}>
                     <InputItem

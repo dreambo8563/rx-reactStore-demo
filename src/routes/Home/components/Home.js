@@ -27,7 +27,8 @@ class App extends Component {
     constructor() {
         super()
         this.state = {
-            currentTab: '1'
+            currentTab: '1',
+            showTabs: true
         }
     }
 
@@ -70,8 +71,17 @@ class App extends Component {
                         .form
                         .getFieldInstance(field)
                         .refs
-
-                    errorRefs[Object.keys(errorRefs)[0]].focus()
+                    this.setState({
+                        ...this.state,
+                        currentTab: parseInt(this.state.currentTab) + 1
+                    });
+                    setTimeout(() => {
+                        this.setState({
+                            ...this.state,
+                            currentTab: String(parseInt(this.state.currentTab) - 1)
+                        });
+                        errorRefs[Object.keys(errorRefs)[0]].focus()
+                    }, 0)
                 } else {
                     if (this.state.currentTab == '1') {
                         changeHomeProps({
@@ -81,17 +91,17 @@ class App extends Component {
                             trainPrice: (parseFloat(value.trainConsume) / parseFloat(value.trainTickets)).toFixed(2),
                             taxiPrice: (parseFloat(value.taxiConsume) / parseFloat(value.taxiTickets)).toFixed(2),
                             flightSingleSave: (parseFloat(value.flightConsume) / parseFloat(value.flightTickets) * 0.2).toFixed(2),
-                            flightSaveCount: (parseFloat(value.flightTickets) * 0.05).toFixed(2),
+                            flightSaveCount: Math.round(parseFloat(value.flightTickets) * 0.05),
                             hotelSingleSave: (parseFloat(value.hotelConsume) / parseFloat(value.hotelTickets) * 0.2).toFixed(2),
-                            hotelSaveCount: (parseFloat(value.hotelTickets) * 0.07).toFixed(2),
+                            hotelSaveCount: Math.round(parseFloat(value.hotelTickets) * 0.07),
                             trainSingleSave: (parseFloat(value.trainConsume) / parseFloat(value.trainTickets) * 0.3).toFixed(2),
-                            trainSaveCount: (parseFloat(value.trainTickets) * 0.07).toFixed(2),
+                            trainSaveCount: Math.round(parseFloat(value.trainTickets) * 0.07),
                             taxiSingleSave: (parseFloat(value.taxiConsume) / parseFloat(value.taxiTickets) * 0.2).toFixed(2),
-                            taxiSaveCount: (parseFloat(value.taxiTickets) * 0.05).toFixed(2),
-                            cheapReminderAffectCount: (parseFloat(value.flightTickets) * 0.25).toFixed(2),
-                            aheadReminderAffectCount: (parseFloat(value.flightTickets) * 0.25).toFixed(2),
-                            flightTimesLimitedSaveCount: (parseFloat(value.flightTickets) * 0.06).toFixed(2),
-                            taxiLocationSaveCount: (parseFloat(value.taxiTickets) * 0.15).toFixed(2),
+                            taxiSaveCount: Math.round(parseFloat(value.taxiTickets) * 0.05),
+                            cheapReminderAffectCount: Math.round(parseFloat(value.flightTickets) * 0.25),
+                            aheadReminderAffectCount: Math.round(parseFloat(value.flightTickets) * 0.25),
+                            flightTimesLimitedSaveCount: Math.round(parseFloat(value.flightTickets) * 0.06),
+                            taxiLocationSaveCount: Math.round(parseFloat(value.taxiTickets) * 0.15),
                             flightTimesLimitedSingleSave: (parseFloat(value.flightConsume) / parseFloat(value.flightTickets)).toFixed(2),
                             taxiLocationSingleSave: (parseFloat(value.taxiConsume) / parseFloat(value.taxiTickets)).toFixed(2)
                         })
@@ -103,17 +113,17 @@ class App extends Component {
                             trainTickets: Math.round(parseFloat(value.trainConsume) / parseFloat(value.trainPrice)),
                             taxiTickets: Math.round(parseFloat(value.taxiConsume) / parseFloat(value.taxiPrice)).toFixed(2),
                             flightSingleSave: (parseFloat(value.flightPrice) * 0.2).toFixed(2),
-                            flightSaveCount: (parseFloat(value.flightConsume) / parseFloat(value.flightPrice) * 0.05).toFixed(2),
+                            flightSaveCount: Math.round(parseFloat(value.flightConsume) / parseFloat(value.flightPrice) * 0.05),
                             hotelSingleSave: (parseFloat(value.hotelPrice) * 0.2).toFixed(2),
-                            hotelSaveCount: (parseFloat(value.hotelConsume) / parseFloat(value.hotelPrice) * 0.07).toFixed(2),
+                            hotelSaveCount: Math.round(parseFloat(value.hotelConsume) / parseFloat(value.hotelPrice) * 0.07),
                             trainSingleSave: (parseFloat(value.trainPrice) * 0.3).toFixed(2),
-                            trainSaveCount: (parseFloat(value.trainConsume) / parseFloat(value.trainPrice) * 0.07).toFixed(2),
+                            trainSaveCount: Math.round(parseFloat(value.trainConsume) / parseFloat(value.trainPrice) * 0.07),
                             taxiSingleSave: (parseFloat(value.taxiPrice) * 0.2).toFixed(2),
-                            taxiSaveCount: (parseFloat(value.taxiConsume) / parseFloat(value.taxiPrice) * 0.05).toFixed(2),
-                            cheapReminderAffectCount: (parseFloat(value.flightConsume) / parseFloat(value.flightPrice) * 0.25).toFixed(2),
-                            aheadReminderAffectCount: (parseFloat(value.flightConsume) / parseFloat(value.flightPrice) * 0.25).toFixed(2),
-                            flightTimesLimitedSaveCount: (parseFloat(value.flightConsume) / parseFloat(value.flightPrice) * 0.06).toFixed(2),
-                            taxiLocationSaveCount: (parseFloat(value.taxiConsume) / parseFloat(value.taxiPrice) * 0.15).toFixed(2),
+                            taxiSaveCount: Math.round(parseFloat(value.taxiConsume) / parseFloat(value.taxiPrice) * 0.05),
+                            cheapReminderAffectCount: Math.round(parseFloat(value.flightConsume) / parseFloat(value.flightPrice) * 0.25),
+                            aheadReminderAffectCount: Math.round(parseFloat(value.flightConsume) / parseFloat(value.flightPrice) * 0.25),
+                            flightTimesLimitedSaveCount: Math.round(parseFloat(value.flightConsume) / parseFloat(value.flightPrice) * 0.06),
+                            taxiLocationSaveCount: Math.round(parseFloat(value.taxiConsume) / parseFloat(value.taxiPrice) * 0.15),
                             flightTimesLimitedSingleSave: parseFloat(value.flightPrice).toFixed(2),
                             taxiLocationSingleSave: parseFloat(value.taxiPrice).toFixed(2)
                         })
@@ -127,7 +137,9 @@ class App extends Component {
     }
     render() {
         const {getFieldProps} = this.props.form
-            // console.log(this.props.homeState);
+        // console.log(this.props.homeState);
+        console.log(this.state);
+        const {showTabs} = this.state
             const {homeState} = this.props
                 let flightTickets,
                     hotelTickets,
@@ -194,58 +206,67 @@ class App extends Component {
                             <InputItem value={total} editable={false}>月消费</InputItem>
                         </List>
                         <List renderHeader={() => '附加信息(选填)'}>
-                            <Tabs swipeable={false} defaultActiveKey='1' onChange={:: this.callback}>
-                                <TabPane tab='填写票数/次数' key='1'>
-                                    {this.state.currentTab == '1'
-                                        ? (
-                                            <div>
-                                                <InputItem
-                                                    labelNumber={8}
-                                                    {...getFieldProps('flightTickets', { rules: [{required: true, message: '单月购买机票数必填'}], onChange:(val) => this.onChange('flightTickets', val), initialValue:homeState.flightTickets || flightTickets })}
-                                                    placeholder='单月购买机票数'>机票张数</InputItem>
-                                                <InputItem
-                                                    labelNumber={8}
-                                                    {...getFieldProps('hotelTickets', { rules: [{required: true, message: '单月入住酒店间夜数必填'}], initialValue:homeState.hotelTickets || hotelTickets })}
-                                                    placeholder='单月入住酒店间夜数'>酒店间夜价数</InputItem>
-                                                <InputItem
-                                                    labelNumber={8}
-                                                    placeholder='单月购买火车票张数'
-                                                    {...getFieldProps('trainTickets', { rules: [{required: true, message: '单月购买火车票张数必填'}], initialValue:homeState.trainTickets || trainTickets })}>火车票张数</InputItem>
-                                                <InputItem
-                                                    labelNumber={8}
-                                                    placeholder='单月用车次数'
-                                                    {...getFieldProps('taxiTickets', { rules: [{required: true, message: '单月用车次数必填'}], initialValue:homeState.taxiTickets || taxiTickets})}>用车次数</InputItem>
-                                            </div>
-                                        )
-                                        : undefined}
+                            {showTabs
+                                ? (
+                                    <Tabs
+                                        swipeable={false}
+                                        defaultActiveKey={this.state.currentTab || '1'}
+                                        onChange={:: this.callback}>
 
-                                </TabPane>
-                                <TabPane tab='填写平均价格' key='2'>
-                                    {this.state.currentTab == '2'
-                                        ? (
-                                            <div>
-                                                <InputItem
-                                                    labelNumber={8}
-                                                    {...getFieldProps('flightPrice', { rules: [{required: true, message: '机票单张平均票价必填'}], initialValue:homeState.flightPrice || avgFlight })}
-                                                    placeholder='机票单张平均票价'>机票单价(元)</InputItem>
-                                                <InputItem
-                                                    labelNumber={8}
-                                                    {...getFieldProps('hotelPrice', { rules: [{required: true, message: '酒店间夜平均金额必填'}], initialValue:homeState.hotelPrice || avgHotel })}
-                                                    placeholder='酒店间夜平均金额'>酒店单价(元)</InputItem>
-                                                <InputItem
-                                                    labelNumber={8}
-                                                    placeholder='火车单张平均票价'
-                                                    {...getFieldProps('trainPrice', { rules: [{required: true, message: '火车单张平均票价必填'}], initialValue:homeState.trainPrice || avgTrain })}>火车单价(元)</InputItem>
-                                                <InputItem
-                                                    labelNumber={8}
-                                                    placeholder='用车单次平均金额'
-                                                    {...getFieldProps('taxiPrice', { rules: [{required: true, message: '用车单次平均金额必填'}], initialValue:homeState.taxiPrice || avgTaxi })}>用车单价(元)</InputItem>
-                                            </div>
-                                        )
-                                        : undefined}
+                                        <TabPane tab='填写票数/次数' key='1'>
+                                            {this.state.currentTab == '1'
+                                                ? (
+                                                    <div>
+                                                        <InputItem
+                                                            labelNumber={8}
+                                                            {...getFieldProps('flightTickets', { rules: [{required: true, message: '单月购买机票数必填'}], onChange:(val) => this.onChange('flightTickets', val), initialValue:homeState.flightTickets || flightTickets })}
+                                                            placeholder='单月购买机票数'>机票张数</InputItem>
+                                                        <InputItem
+                                                            labelNumber={8}
+                                                            {...getFieldProps('hotelTickets', { rules: [{required: true, message: '单月入住酒店间夜数必填'}], initialValue:homeState.hotelTickets || hotelTickets })}
+                                                            placeholder='单月入住酒店间夜数'>酒店间夜价数</InputItem>
+                                                        <InputItem
+                                                            labelNumber={8}
+                                                            placeholder='单月购买火车票张数'
+                                                            {...getFieldProps('trainTickets', { rules: [{required: true, message: '单月购买火车票张数必填'}], initialValue:homeState.trainTickets || trainTickets })}>火车票张数</InputItem>
+                                                        <InputItem
+                                                            labelNumber={8}
+                                                            placeholder='单月用车次数'
+                                                            {...getFieldProps('taxiTickets', { rules: [{required: true, message: '单月用车次数必填'}], initialValue:homeState.taxiTickets || taxiTickets})}>用车次数</InputItem>
+                                                    </div>
+                                                )
+                                                : undefined}
 
-                                </TabPane>
-                            </Tabs>
+                                        </TabPane>
+                                        <TabPane tab='填写平均价格' key='2'>
+                                            {this.state.currentTab == '2'
+                                                ? (
+                                                    <div>
+                                                        <InputItem
+                                                            labelNumber={8}
+                                                            {...getFieldProps('flightPrice', { rules: [{required: true, message: '机票单张平均票价必填'}], initialValue:homeState.flightPrice || avgFlight })}
+                                                            placeholder='机票单张平均票价'>机票单价(元)</InputItem>
+                                                        <InputItem
+                                                            labelNumber={8}
+                                                            {...getFieldProps('hotelPrice', { rules: [{required: true, message: '酒店间夜平均金额必填'}], initialValue:homeState.hotelPrice || avgHotel })}
+                                                            placeholder='酒店间夜平均金额'>酒店单价(元)</InputItem>
+                                                        <InputItem
+                                                            labelNumber={8}
+                                                            placeholder='火车单张平均票价'
+                                                            {...getFieldProps('trainPrice', { rules: [{required: true, message: '火车单张平均票价必填'}], initialValue:homeState.trainPrice || avgTrain })}>火车单价(元)</InputItem>
+                                                        <InputItem
+                                                            labelNumber={8}
+                                                            placeholder='用车单次平均金额'
+                                                            {...getFieldProps('taxiPrice', { rules: [{required: true, message: '用车单次平均金额必填'}], initialValue:homeState.taxiPrice || avgTaxi })}>用车单价(元)</InputItem>
+                                                    </div>
+                                                )
+                                                : undefined}
+
+                                        </TabPane>
+                                    </Tabs>
+                                )
+                                : undefined}
+
                         </List>
                         <WhiteSpace size='lg'/>
                         <Button onClick={:: this.submit} type='primary'>下一步</Button>
