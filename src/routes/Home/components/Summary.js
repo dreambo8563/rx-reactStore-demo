@@ -211,7 +211,7 @@ class Summary extends Component {
                                         总节省/元
                                     </div>
                                     <div className={s.number}>
-                                        {parseInt(parseFloat(flighRule) + parseFloat(hotelRule) + parseFloat(trainRule) + parseFloat(taxiRule)) + parseInt(flightReminder) + parseInt((flightTime + hotelTime + trainTime + taxiTime) * homeState.salary / 22 / 8 / 60)}
+                                        {parseInt(parseFloat(flighRule) + parseFloat(hotelRule) + parseFloat(trainRule) + parseFloat(taxiRule)) + parseInt(flightReminder) + parseInt((flightTime + hotelTime + trainTime + taxiTime) * homeState.salary / 22 / 8 / 60) + parseInt(parseFloat(flightAd) + parseFloat(hotelAd) + parseFloat(trainAd))}
                                     </div>
                                 </div>
                                 <div className={cx(s.columnFlexContainer, s.flexItem, s.cell)}>
