@@ -18,6 +18,7 @@ class ControlSettings extends Component {
     }
     goConfig() {
         browserHistory.push('/calculator/config')
+        // browserHistory.push('/config')
     }
     submit() {
         this
@@ -36,7 +37,8 @@ class ControlSettings extends Component {
 
                     errorRefs[Object.keys(errorRefs)[0]].focus()
                 } else {
-                    console.log(value);
+                    // console.log(value);
+                    // browserHistory.push('/summary')
                     browserHistory.push('/calculator/summary')
                 }
             });

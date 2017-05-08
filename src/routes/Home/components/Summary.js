@@ -93,7 +93,7 @@ class Summary extends Component {
         const taxiTime = parseInt(parseFloat(homeState.taxiTickets) * (parseFloat(homeState.tieSaveTime) + parseFloat(homeState.finSaveTime)))
 
         const width = window.screen.width - 40
-        // console.log(trainAd);
+        // console.log(homeState.trainTickets, homeState.trainAd, trainAd);
         const data = [
             {
                 name: '机票',
@@ -187,6 +187,7 @@ class Summary extends Component {
             taxiTime
         } = this.state
         const {homeState} = this.props
+
         return (
             <div>
                 <Tabs
@@ -210,13 +211,13 @@ class Summary extends Component {
                                         总节省/元
                                     </div>
                                     <div className={s.number}>
-                                        {parseInt(flighRule + hotelRule + trainRule + taxiRule) + parseInt(flightReminder) + parseInt((flightTime + hotelTime + trainTime + taxiTime) * homeState.salary / 22 / 8 / 60)}
+                                        {parseInt(parseFloat(flighRule) + parseFloat(hotelRule) + parseFloat(trainRule) + parseFloat(taxiRule)) + parseInt(flightReminder) + parseInt((flightTime + hotelTime + trainTime + taxiTime) * homeState.salary / 22 / 8 / 60)}
                                     </div>
                                 </div>
                                 <div className={cx(s.columnFlexContainer, s.flexItem, s.cell)}>
                                     <div className={s.tableItemHeader}>管控节省</div>
                                     <div className={s.number}>
-                                        {parseInt(flighRule + hotelRule + trainRule + taxiRule) + parseInt(flightReminder)}</div>
+                                        {parseInt(parseFloat(flighRule) + parseFloat(hotelRule) + parseFloat(trainRule) + parseFloat(taxiRule)) + parseInt(flightReminder)}</div>
                                 </div>
                             </div>
                             <div className={s.flexContainer}>
@@ -227,7 +228,7 @@ class Summary extends Component {
                                 </div>
                                 <div className={cx(s.columnFlexContainer, s.flexItem, s.cell)}>
                                     <div className={s.tableItemHeader}>价格优势</div>
-                                    <div className={s.number}>{parseInt(flightAd + hotelAd + trainAd)}</div>
+                                    <div className={s.number}>{parseInt(parseFloat(flightAd) + parseFloat(hotelAd) + parseFloat(trainAd))}</div>
                                 </div>
                             </div>
                         </div>
@@ -242,12 +243,12 @@ class Summary extends Component {
                                         管控总节省/元
                                     </div>
                                     <div className={s.number}>
-                                        {parseInt(flighRule + hotelRule + trainRule + taxiRule) + parseInt(flightReminder)}
+                                        {parseInt(parseFloat(flighRule) + parseFloat(hotelRule) + parseFloat(trainRule) + parseFloat(taxiRule)) + parseInt(flightReminder)}
                                     </div>
                                 </div>
                                 <div className={cx(s.columnFlexContainer, s.flexItem, s.cell)}>
                                     <div className={s.tableItemHeader}>规则节省/元</div>
-                                    <div className={s.number}>{parseInt(flighRule + hotelRule + trainRule + taxiRule)}
+                                    <div className={s.number}>{parseInt(parseFloat(flighRule) + parseFloat(hotelRule) + parseFloat(trainRule) + parseFloat(taxiRule))}
                                     </div>
                                 </div >
                             </div>
@@ -315,13 +316,13 @@ class Summary extends Component {
                                         总节省/元
                                     </div>
                                     <div className={s.number}>
-                                        {(parseInt(flighRule + hotelRule + trainRule + taxiRule) + parseInt(flightReminder) + parseInt((flightTime + hotelTime + trainTime + taxiTime) * homeState.salary / 22 / 8 / 60)) * 12}
+                                        {(parseInt(parseFloat(flighRule) + parseFloat(hotelRule) + parseFloat(trainRule) + parseFloat(taxiRule)) + parseInt(flightReminder) + parseInt((flightTime + hotelTime + trainTime + taxiTime) * homeState.salary / 22 / 8 / 60)) * 12}
                                     </div>
                                 </div>
                                 <div className={cx(s.columnFlexContainer, s.flexItem, s.cell)}>
                                     <div className={s.tableItemHeader}>管控节省</div>
                                     <div className={s.number}>
-                                        {(parseInt(flighRule + hotelRule + trainRule + taxiRule) + parseInt(flightReminder)) * 12}</div>
+                                        {(parseInt(parseFloat(flighRule) + parseFloat(hotelRule) + parseFloat(trainRule) + parseFloat(taxiRule)) + parseInt(flightReminder)) * 12}</div>
                                 </div>
                             </div>
                             <div className={s.flexContainer}>
@@ -347,12 +348,12 @@ class Summary extends Component {
                                         管控总节省/元
                                     </div>
                                     <div className={s.number}>
-                                        {(parseInt(flighRule + hotelRule + trainRule + taxiRule) + parseInt(flightReminder)) * 12}
+                                        {(parseInt(parseFloat(flighRule) + parseFloat(hotelRule) + parseFloat(trainRule) + parseFloat(taxiRule)) + parseInt(flightReminder)) * 12}
                                     </div>
                                 </div>
                                 <div className={cx(s.columnFlexContainer, s.flexItem, s.cell)}>
                                     <div className={s.tableItemHeader}>规则节省/元</div>
-                                    <div className={s.number}>{parseInt(flighRule + hotelRule + trainRule + taxiRule) * 12}
+                                    <div className={s.number}>{parseInt(parseFloat(flighRule) + parseFloat(hotelRule) + parseFloat(trainRule) + parseFloat(taxiRule)) * 12}
                                     </div>
                                 </div >
                             </div>
@@ -403,7 +404,6 @@ class Summary extends Component {
                             <Icon type='right'/>
                         </div>
                         <WhiteSpace size='lg'/>
-
                     </TabPane>
                 </Tabs>
             </div>

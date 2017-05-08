@@ -30,7 +30,7 @@ export const homeState = {
     taxiSaveCount: undefined,
     taxiSingleSave: undefined,
     tieSaveTime: 5,
-    trainAd: 1,
+    trainAd: 5,
     trainSaveCount: undefined,
     trainSingleSave: undefined,
     slideWithAheadFlight: 15,

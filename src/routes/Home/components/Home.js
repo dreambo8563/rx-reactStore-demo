@@ -128,6 +128,7 @@ class App extends Component {
                             taxiLocationSingleSave: parseFloat(value.taxiPrice).toFixed(2)
                         })
                     }
+                    // browserHistory.push('/control')
                     browserHistory.push('/calculator/control')
                 }
             });
