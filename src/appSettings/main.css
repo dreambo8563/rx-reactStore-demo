@@ -4,6 +4,9 @@
      background: cornsilk;
      display: flex;
  }
+ iframe{
+     display: none !important
+ }
 
  :global(#app) {
      width: 100%

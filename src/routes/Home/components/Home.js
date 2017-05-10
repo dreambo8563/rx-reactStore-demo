@@ -134,7 +134,7 @@ class App extends Component {
             });
     }
     componentDidMount() {
-        document.title = '省钱计算器'
+        document.title = '省钱报告'
     }
     render() {
         const {getFieldProps} = this.props.form
