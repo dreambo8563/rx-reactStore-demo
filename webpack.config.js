@@ -25,7 +25,7 @@ const common = merge([
         output: {
             path: PATHS.build,
             filename: '[name].[hash].js',
-            publicPath: './'
+            publicPath: '/'
         },
         plugins: [new HtmlWebpackPlugin({
                 template: HtmlWebpackTemplate, title: '省钱计算器', appMountId: 'app', // Generate #app where to mount

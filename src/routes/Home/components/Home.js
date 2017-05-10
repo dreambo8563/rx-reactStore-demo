@@ -128,8 +128,8 @@ class App extends Component {
                             taxiLocationSingleSave: parseFloat(value.taxiPrice).toFixed(2)
                         })
                     }
-                    // browserHistory.push('/control')
-                    browserHistory.push('/calculator/control')
+                    browserHistory.push('/control')
+                    // browserHistory.push('/calculator/control')
                 }
             });
     }
@@ -157,7 +157,7 @@ class App extends Component {
                     trainTickets = Math.round(Number(value) * 3.005)
                 }
                 if (homeState.employeeNum) {
-                    taxiTickets = Math.round(Number(homeState.employeeNum) * 22 * 0.0015)
+                    taxiTickets = Math.round(Number(homeState.employeeNum) * 22 * 0.05)
                 }
                 if (homeState.flightConsume != undefined && !!flightTickets) {
                     avgFlight = Number(parseFloat(homeState.flightConsume) / parseFloat(flightTickets)).toFixed(2)

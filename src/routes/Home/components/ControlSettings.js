@@ -17,8 +17,8 @@ class ControlSettings extends Component {
         form: PropTypes.any
     }
     goConfig() {
-        browserHistory.push('/calculator/config')
-        // browserHistory.push('/config')
+        // browserHistory.push('/calculator/config')
+        browserHistory.push('/config')
     }
     submit() {
         this
@@ -38,8 +38,8 @@ class ControlSettings extends Component {
                     errorRefs[Object.keys(errorRefs)[0]].focus()
                 } else {
                     // console.log(value);
-                    // browserHistory.push('/summary')
-                    browserHistory.push('/calculator/summary')
+                    browserHistory.push('/summary')
+                    // browserHistory.push('/calculator/summary')
                 }
             });
     }
