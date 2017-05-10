@@ -333,7 +333,7 @@ class Summary extends Component {
                                 </div>
                                 <div className={cx(s.columnFlexContainer, s.flexItem, s.cell)}>
                                     <div className={s.tableItemHeader}>价格优势</div>
-                                    <div className={s.number}>{parseInt(flightAd + hotelAd + trainAd) * 12}</div>
+                                    <div className={s.number}>{parseInt(parseFloat(flightAd) + parseFloat(hotelAd) + parseFloat(trainAd)) * 12}</div>
                                 </div>
                             </div>
                         </div>
