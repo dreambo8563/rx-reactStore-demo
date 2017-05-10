@@ -22,6 +22,20 @@ function handleTabClick(key) {
     console.log('onTabClick', key);
 }
 
+function moneyFormat(number) {
+    return Array
+        .from(String(number))
+        .reverse()
+        .map((v, i) => {
+            if (i % 3 == 0 && i != 0) {
+                return `${v},`
+            }
+            return v
+        })
+        .reverse()
+        .join("")
+}
+
 class StackedBarChart extends Component {
     static propTypes = {
         width: PropTypes.number,
@@ -30,6 +44,7 @@ class StackedBarChart extends Component {
     render() {
         return (
             <BarChart
+                barCategoryGap='25%'
                 width={this.props.width * 2}
                 height={400}
                 data={this.props.data}
@@ -40,12 +55,13 @@ class StackedBarChart extends Component {
                 bottom: 30
             }}>
                 <XAxis dataKey='name'/>
-                <YAxis/>
+                <YAxis tickFormatter={(value) => `${parseFloat(value / 1000).toFixed(2)}K`}/>
                 <CartesianGrid strokeDasharray='3 3'/>
                 <Tooltip/>
                 <Legend
                     wrapperStyle={{
-                    bottom: 2
+                    bottom: 2,
+                    fontSize:24
                 }}
                     verticalAlign='bottom'/>
                 <Bar dataKey='规则管控' stackId='a' fill='#EDBB55'/>
@@ -211,24 +227,24 @@ class Summary extends Component {
                                         总节省/元
                                     </div>
                                     <div className={s.number}>
-                                        {parseInt(parseFloat(flighRule) + parseFloat(hotelRule) + parseFloat(trainRule) + parseFloat(taxiRule)) + parseInt(flightReminder) + parseInt((flightTime + hotelTime + trainTime + taxiTime) * homeState.salary / 22 / 8 / 60) + parseInt(parseFloat(flightAd) + parseFloat(hotelAd) + parseFloat(trainAd))}
+                                        {moneyFormat(parseInt(parseFloat(flighRule) + parseFloat(hotelRule) + parseFloat(trainRule) + parseFloat(taxiRule)) + parseInt(flightReminder) + parseInt((flightTime + hotelTime + trainTime + taxiTime) * homeState.salary / 22 / 8 / 60) + parseInt(parseFloat(flightAd) + parseFloat(hotelAd) + parseFloat(trainAd)))}
                                     </div>
                                 </div>
                                 <div className={cx(s.columnFlexContainer, s.flexItem, s.cell)}>
                                     <div className={s.tableItemHeader}>管控节省</div>
                                     <div className={s.number}>
-                                        {parseInt(parseFloat(flighRule) + parseFloat(hotelRule) + parseFloat(trainRule) + parseFloat(taxiRule)) + parseInt(flightReminder)}</div>
+                                        {moneyFormat(parseInt(parseFloat(flighRule) + parseFloat(hotelRule) + parseFloat(trainRule) + parseFloat(taxiRule)) + parseInt(flightReminder))}</div>
                                 </div>
                             </div>
                             <div className={s.flexContainer}>
                                 <div className={cx(s.columnFlexContainer, s.flexItem, s.cell)}>
                                     <div className={s.tableItemHeader}>节省人力</div>
                                     <div className={s.number}>
-                                        {parseInt((flightTime + hotelTime + trainTime + taxiTime) * homeState.salary / 22 / 8 / 60)}</div>
+                                        {moneyFormat(parseInt((flightTime + hotelTime + trainTime + taxiTime) * homeState.salary / 22 / 8 / 60))}</div>
                                 </div>
                                 <div className={cx(s.columnFlexContainer, s.flexItem, s.cell)}>
                                     <div className={s.tableItemHeader}>价格优势</div>
-                                    <div className={s.number}>{parseInt(parseFloat(flightAd) + parseFloat(hotelAd) + parseFloat(trainAd))}</div>
+                                    <div className={s.number}>{moneyFormat(parseInt(parseFloat(flightAd) + parseFloat(hotelAd) + parseFloat(trainAd)))}</div>
                                 </div>
                             </div>
                         </div>
@@ -243,19 +259,19 @@ class Summary extends Component {
                                         管控总节省/元
                                     </div>
                                     <div className={s.number}>
-                                        {parseInt(parseFloat(flighRule) + parseFloat(hotelRule) + parseFloat(trainRule) + parseFloat(taxiRule)) + parseInt(flightReminder)}
+                                        {moneyFormat(parseInt(parseFloat(flighRule) + parseFloat(hotelRule) + parseFloat(trainRule) + parseFloat(taxiRule)) + parseInt(flightReminder))}
                                     </div>
                                 </div>
                                 <div className={cx(s.columnFlexContainer, s.flexItem, s.cell)}>
                                     <div className={s.tableItemHeader}>规则节省/元</div>
-                                    <div className={s.number}>{parseInt(parseFloat(flighRule) + parseFloat(hotelRule) + parseFloat(trainRule) + parseFloat(taxiRule))}
+                                    <div className={s.number}>{moneyFormat(parseInt(parseFloat(flighRule) + parseFloat(hotelRule) + parseFloat(trainRule) + parseFloat(taxiRule)))}
                                     </div>
                                 </div >
                             </div>
                             < div className={s.flexContainer}>
                                 <div className={cx(s.columnFlexContainer, s.flexItem, s.cell)}>
                                     <div className={s.tableItemHeader}>提醒节省/元</div>
-                                    <div className={s.number}>{parseInt(flightReminder)}</div>
+                                    <div className={s.number}>{moneyFormat(parseInt(flightReminder))}</div>
                                 </div>
                                 <div className={cx(s.columnFlexContainer, s.flexItem, s.cell)}>
                                     <div className={cx(s.tableItemHeader, s.opacity)}>总节省/元</div>
@@ -274,7 +290,7 @@ class Summary extends Component {
                                         人力总节省/元
                                     </div>
                                     <div className={s.number}>
-                                        {parseInt((flightTime + hotelTime + trainTime + taxiTime) * homeState.salary / 22 / 8 / 60)}
+                                        {moneyFormat(parseInt((flightTime + hotelTime + trainTime + taxiTime) * homeState.salary / 22 / 8 / 60))}
                                     </div>
                                 </div>
                                 <div className={cx(s.columnFlexContainer, s.flexItem, s.cell)}>
@@ -316,24 +332,24 @@ class Summary extends Component {
                                         总节省/元
                                     </div>
                                     <div className={s.number}>
-                                        {(parseInt(parseFloat(flighRule) + parseFloat(hotelRule) + parseFloat(trainRule) + parseFloat(taxiRule)) + parseInt(flightReminder) + parseInt((flightTime + hotelTime + trainTime + taxiTime) * homeState.salary / 22 / 8 / 60)) * 12}
+                                        {moneyFormat((parseInt(parseFloat(flighRule) + parseFloat(hotelRule) + parseFloat(trainRule) + parseFloat(taxiRule)) + parseInt(flightReminder) + parseInt((flightTime + hotelTime + trainTime + taxiTime) * homeState.salary / 22 / 8 / 60)) * 12)}
                                     </div>
                                 </div>
                                 <div className={cx(s.columnFlexContainer, s.flexItem, s.cell)}>
                                     <div className={s.tableItemHeader}>管控节省</div>
                                     <div className={s.number}>
-                                        {(parseInt(parseFloat(flighRule) + parseFloat(hotelRule) + parseFloat(trainRule) + parseFloat(taxiRule)) + parseInt(flightReminder)) * 12}</div>
+                                        {moneyFormat((parseInt(parseFloat(flighRule) + parseFloat(hotelRule) + parseFloat(trainRule) + parseFloat(taxiRule)) + parseInt(flightReminder)) * 12)}</div>
                                 </div>
                             </div>
                             <div className={s.flexContainer}>
                                 <div className={cx(s.columnFlexContainer, s.flexItem, s.cell)}>
                                     <div className={s.tableItemHeader}>节省人力</div>
                                     <div className={s.number}>
-                                        {parseInt((flightTime + hotelTime + trainTime + taxiTime) * homeState.salary / 22 / 8 / 60) * 12}</div>
+                                        {moneyFormat(parseInt((flightTime + hotelTime + trainTime + taxiTime) * homeState.salary / 22 / 8 / 60) * 12)}</div>
                                 </div>
                                 <div className={cx(s.columnFlexContainer, s.flexItem, s.cell)}>
                                     <div className={s.tableItemHeader}>价格优势</div>
-                                    <div className={s.number}>{parseInt(parseFloat(flightAd) + parseFloat(hotelAd) + parseFloat(trainAd)) * 12}</div>
+                                    <div className={s.number}>{moneyFormat(parseInt(parseFloat(flightAd) + parseFloat(hotelAd) + parseFloat(trainAd)) * 12)}</div>
                                 </div>
                             </div>
                         </div>
@@ -348,19 +364,19 @@ class Summary extends Component {
                                         管控总节省/元
                                     </div>
                                     <div className={s.number}>
-                                        {(parseInt(parseFloat(flighRule) + parseFloat(hotelRule) + parseFloat(trainRule) + parseFloat(taxiRule)) + parseInt(flightReminder)) * 12}
+                                        {moneyFormat((parseInt(parseFloat(flighRule) + parseFloat(hotelRule) + parseFloat(trainRule) + parseFloat(taxiRule)) + parseInt(flightReminder)) * 12)}
                                     </div>
                                 </div>
                                 <div className={cx(s.columnFlexContainer, s.flexItem, s.cell)}>
                                     <div className={s.tableItemHeader}>规则节省/元</div>
-                                    <div className={s.number}>{parseInt(parseFloat(flighRule) + parseFloat(hotelRule) + parseFloat(trainRule) + parseFloat(taxiRule)) * 12}
+                                    <div className={s.number}>{moneyFormat(parseInt(parseFloat(flighRule) + parseFloat(hotelRule) + parseFloat(trainRule) + parseFloat(taxiRule)) * 12)}
                                     </div>
                                 </div >
                             </div>
                             < div className={s.flexContainer}>
                                 <div className={cx(s.columnFlexContainer, s.flexItem, s.cell)}>
                                     <div className={s.tableItemHeader}>提醒节省/元</div>
-                                    <div className={s.number}>{parseInt(flightReminder) * 12}</div>
+                                    <div className={s.number}>{moneyFormat(parseInt(flightReminder) * 12)}</div>
                                 </div>
                                 <div className={cx(s.columnFlexContainer, s.flexItem, s.cell)}>
                                     <div className={cx(s.tableItemHeader, s.opacity)}>总节省/元</div>
@@ -379,7 +395,7 @@ class Summary extends Component {
                                         人力总节省/元
                                     </div>
                                     <div className={s.number}>
-                                        {parseInt((flightTime + hotelTime + trainTime + taxiTime) * homeState.salary / 22 / 8 / 60) * 12}
+                                        {moneyFormat(parseInt((flightTime + hotelTime + trainTime + taxiTime) * homeState.salary / 22 / 8 / 60) * 12)}
                                     </div>
                                 </div>
                                 <div className={cx(s.columnFlexContainer, s.flexItem, s.cell)}>
