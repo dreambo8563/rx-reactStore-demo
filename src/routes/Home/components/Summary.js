@@ -55,7 +55,7 @@ class StackedBarChart extends Component {
                 bottom: 30
             }}>
                 <XAxis dataKey='name'/>
-                <YAxis tickFormatter={(value) => `${parseInt(value / 1000)}K`}/>
+                <YAxis tickFormatter={(value) => `${parseFloat(value / 1000).toFixed(1)}k`}/>
                 <CartesianGrid strokeDasharray='3 3'/>
                 <Tooltip/>
                 <Legend
@@ -295,13 +295,13 @@ class Summary extends Component {
                                 </div>
                                 <div className={cx(s.columnFlexContainer, s.flexItem, s.cell)}>
                                     <div className={s.tableItemHeader}>人力节省/分钟</div>
-                                    <div className={s.number}>{parseInt(flightTime + hotelTime + trainTime + taxiTime)}</div>
+                                    <div className={s.number}>{moneyFormat(parseInt(flightTime + hotelTime + trainTime + taxiTime))}</div>
                                 </div>
                             </div>
                             <div className={s.flexContainer}>
                                 <div className={cx(s.columnFlexContainer, s.flexItem, s.cell)}>
                                     <div className={s.tableItemHeader}>纸张节省/张</div>
-                                    <div className={s.number}>{parseInt((parseFloat(homeState.flightTickets) + parseFloat(homeState.hotelTickets) + parseFloat(homeState.trainTickets) + parseFloat(homeState.taxiTickets)) * 0.25)}</div>
+                                    <div className={s.number}>{moneyFormat(parseInt((parseFloat(homeState.flightTickets) + parseFloat(homeState.hotelTickets) + parseFloat(homeState.trainTickets) + parseFloat(homeState.taxiTickets)) * 0.25))}</div>
                                 </div>
                                 <div className={cx(s.columnFlexContainer, s.flexItem, s.cell)}>
                                     <div className={cx(s.tableItemHeader, s.opacity)}>总节省/元</div>
