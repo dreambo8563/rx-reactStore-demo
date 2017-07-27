@@ -1,0 +1,20 @@
+.loading {
+    position: fixed;
+    z-index: 999;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.logo {
+    font-size: 30px;
+    color: #f09a37;
+}
+
+.dropdown_link {
+    font-size: 12px;
+    color: white
+}
+.logoContainer{
+    padding: 20px;
+}

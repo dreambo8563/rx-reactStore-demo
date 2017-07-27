@@ -1,0 +1,10 @@
+.picture_wall :global .ant-upload-select-picture-card i {
+  font-size: 28px;
+  color: #999;
+}
+
+.picture_wall :global .ant-upload-select-picture-card .ant-upload-text {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #666;
+}

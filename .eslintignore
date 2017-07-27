@@ -1,0 +1,6 @@
+public/**
+node_modules/**
+dist/**
+build/**
+webpack.config.js
+webpack.parts.js

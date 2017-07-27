@@ -1,0 +1,32 @@
+{
+    "plugins": [
+        [
+            "import",
+            {
+                "libraryName": "antd",
+                "style": true
+            }
+        ],
+        "syntax-dynamic-import",
+        "transform-function-bind",
+        "transform-decorators-legacy",
+        "transform-object-rest-spread"
+    ],
+    "presets": [
+        [
+            "es2015",
+            {
+                "modules": false
+            }
+        ],
+        "stage-0",
+        "react"
+    ],
+    "env": {
+        "development": {
+            "plugins": [
+                "react-hot-loader/babel"
+            ]
+        }
+    }
+}

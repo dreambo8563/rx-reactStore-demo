@@ -1,0 +1,190 @@
+/*color & font or other global styles*/
+
+body {
+    background-color: cornsilk;
+}
+
+hr {
+    border-color: #d9d9d9 !important;
+}
+
+:global #app {
+    height: 100%;
+}
+
+:global .pageFrame {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+
+/* 页脚 */
+
+:global .footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* 通用row间距离 */
+
+:global .row_space {
+    height: 20px;
+}
+
+
+/* 隐藏 */
+
+:global .hidden {
+    display: none;
+}
+
+
+/* 统一border颜色 */
+
+:global .borderColor {
+    border-color: #d9d9d9 !important;
+}
+
+
+/* 类似link的文字样式 */
+
+:global .linkLikeText {
+    color: #f4b267;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+/* 带间距的容器样式 */
+
+:global .paddingContainer {
+    padding: 10px;
+    border-color: #d9d9d9 !important;
+    border-width: 1px;
+    border-style: solid;
+}
+
+:global .greenColor {
+    color: green
+}
+
+:global .red {
+    color: red
+}
+
+
+/* 右侧内容,绝对定位 */
+
+:global .pendingRight {
+    position: absolute;
+    left: 105%;
+    top: 0;
+    width: 100%;
+}
+
+
+/* inline-block 布局 */
+
+ :global .inlineBlock {
+    display: inline-block !important
+}
+
+
+/* block 布局 */
+
+:global .block {
+    display: block !important
+}
+
+
+/* 录播图样式 */
+
+:global .ant-carousel .slick-prev,
+:global .ant-carousel .slick-next {
+    font-size: 18px !important;
+}
+
+:global .ant-carousel .slick-prev:before,
+:global .ant-carousel .slick-next:before {
+    color: #f4b267;
+}
+
+
+/* 排序箭头icon */
+
+:global .ant-table-column-sorter {
+    position: relative;
+    margin-left: 4px;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+:global .ant-table-column-sorter-down,
+:global .ant-table-column-sorter-up {
+    line-height: 4px;
+    display: block;
+    width: 14px;
+    cursor: pointer;
+}
+
+:global .ant-table-column-sorter-down:hover .anticon,
+:global .ant-table-column-sorter-up:hover .anticon {
+    color: rgba(0, 0, 0, .65);
+}
+
+:global .ant-table-column-sorter-down.on .anticon-caret-down,
+:global .ant-table-column-sorter-down.on .anticon-caret-up,
+:global .ant-table-column-sorter-up.on .anticon-caret-down,
+:global .ant-table-column-sorter-up.on .anticon-caret-up {
+    color: #f4b267;
+}
+
+:global .ant-table-column-sorter-down:after,
+:global .ant-table-column-sorter-up:after {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 14px;
+    left: 0;
+}
+
+:global .ant-table-column-sorter-up:after {
+    top: -19px;
+}
+
+:global .ant-table-column-sorter-down:after {
+    bottom: -17px;
+}
+
+:global .ant-table-column-sorter .anticon-caret-down,
+:global .ant-table-column-sorter .anticon-caret-up {
+    display: inline-block;
+    font-size: 12px;
+    font-size: 8px\9;
+    -webkit-transform: scale(.66666667) rotate(0deg);
+    -ms-transform: scale(.66666667) rotate(0deg);
+    transform: scale(.66666667) rotate(0deg);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=1, M12=0, M21=0, M22=1)";
+    zoom: 1;
+    line-height: 6px;
+    height: 6px;
+    color: #aaa;
+}
+
+:global .ant-table-column-sorter .anticon-caret-down,
+:global .ant-table-column-sorter .anticon-caret-up {
+    -webkit-filter: none;
+    filter: none;
+    font-size: 12px;
+}
+
+:global .ant-table-column-sorter .anticon-caret-down:before,
+:global .ant-table-column-sorter .anticon-caret-up:before {
+    -moz-transform-origin: 53% 50%;
+}

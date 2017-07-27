@@ -1,0 +1,24 @@
+.bg {
+    background-image: url("./../../../assets/login/bg.png");
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center
+}
+
+.login_form{
+    background-color: white;
+    padding: 20px;
+    width: 350px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around
+}
+.login_form_button{
+    width: 100%
+}
+.login_form_sysName{
+    text-align: center;
+    margin-bottom: 20px;
+}

@@ -1,0 +1,11 @@
+
+/*table中自定义的下拉筛选*/
+.custom_filter_dropdown {
+  padding: 8px;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
+}
+ .custom_filter_dropdown :global .ant-checkbox-group-item{
+      display: table
+  }

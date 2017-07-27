@@ -1,0 +1,14 @@
+.price {
+    font-size: 40px
+}
+
+.priceSup {
+    top: -1.5em !important
+}
+
+.hotelContentContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%
+}
