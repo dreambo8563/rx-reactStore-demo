@@ -1,6 +1,21 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { Steps, Row, Col, Form, Select, TimePicker, Button, Input, Radio, DatePicker, Checkbox, Icon, Modal, TreeSelect } from 'antd'
+import {
+  Steps,
+  Row,
+  Col,
+  Form,
+  Select,
+  TimePicker,
+  Button,
+  Input,
+  Radio,
+  DatePicker,
+  Checkbox,
+  Icon,
+  Modal,
+  TreeSelect
+} from 'antd'
 import {
   navTree,
   pleaseInput,
@@ -45,8 +60,20 @@ import SingleEmployeeModal from 'shared/Components/SingleEmployeeModal'
 import HotelBrefSection from '../fragments/HotelBrefSection'
 import s from './HotelTicketPreOrderFill.css'
 import { goBack } from 'utils/navigate'
-import { certificateType, sexEnum, costAttributeTypeEnum, hotelPreOrderSteps, rowGutter } from 'constants/Enum'
-import { employeeList, orgList, tripApply, confirmHotelTicket, hotelBasicInfo } from 'constants/API'
+import {
+  certificateType,
+  sexEnum,
+  costAttributeTypeEnum,
+  hotelPreOrderSteps,
+  rowGutter
+} from 'constants/Enum'
+import {
+  employeeList,
+  orgList,
+  tripApply,
+  confirmHotelTicket,
+  hotelBasicInfo
+} from 'constants/API'
 import { jsonGet, searchWithQS, jsonPost } from 'utils/http'
 import { depTreeTransform } from 'utils/listHelper'
 import { compactObj, getOrElse } from 'utils/objHelper'
@@ -111,7 +138,10 @@ class HotelTicketPreOrderFill extends PureComponent {
   handleOk = () => {
     const { form } = this.props
 
-    if (this.employeeModalInfo.selectedData && this.employeeModalInfo.selectedData.length > 0) {
+    if (
+      this.employeeModalInfo.selectedData &&
+      this.employeeModalInfo.selectedData.length > 0
+    ) {
       const selectedData = R.head(this.employeeModalInfo.selectedData)
 
       switch (this.employeeModalInfo.type) {
@@ -148,18 +178,24 @@ class HotelTicketPreOrderFill extends PureComponent {
           break
         case 'guest':
           form.setFieldsValue({
-            [`guestName${this.employeeModalInfo.index}`]: selectedData.employee_name,
-            [`guestPhone${this.employeeModalInfo.index}`]: selectedData.phone_num
+            [`guestName${this.employeeModalInfo
+              .index}`]: selectedData.employee_name,
+            [`guestPhone${this.employeeModalInfo
+              .index}`]: selectedData.phone_num
           })
           break
         case 'insurance':
           form.setFieldsValue({
             insuranceName: selectedData.employee_name,
             insurancePhone: selectedData.phone_num,
-            id_type: selectedData.id_type ? String(selectedData.id_type) : undefined,
+            id_type: selectedData.id_type
+              ? String(selectedData.id_type)
+              : undefined,
             id_number: selectedData.id_number,
             sex: selectedData.gender ? String(selectedData.gender) : undefined,
-            birthday: selectedData.birth_date ? moment(selectedData.birth_date) : undefined
+            birthday: selectedData.birth_date
+              ? moment(selectedData.birth_date)
+              : undefined
           })
           break
         case 'contact':
@@ -181,6 +217,7 @@ class HotelTicketPreOrderFill extends PureComponent {
       [field]: true
     })
   }
+  
   /**
    * 重新组合post数据
    *
@@ -197,10 +234,12 @@ class HotelTicketPreOrderFill extends PureComponent {
     data.room_count = parseInt(value.room_count)
     data.company_id = selectedCompany.id
     data.booked_by_id = this.preOrderEmployeeInfo.employee_id
-    data.check_in_info = Array(parseInt(value.room_count)).fill(1).map((v, i) => ({
-      name: value[`guestName${i}`],
-      phone: value[`guestPhone${i}`]
-    }))
+    data.check_in_info = Array(parseInt(value.room_count))
+      .fill(1)
+      .map((v, i) => ({
+        name: value[`guestName${i}`],
+        phone: value[`guestPhone${i}`]
+      }))
     data.assurance_info = {
       name: value.insuranceName,
       phone: value.insurancePhone,
@@ -226,13 +265,17 @@ class HotelTicketPreOrderFill extends PureComponent {
       console.log(values)
       if (!err) {
         console.log(values)
-        jsonPost(confirmHotelTicket, compactObj(this.formProcess(values))).subscribe(res => {
+        jsonPost(
+          confirmHotelTicket,
+          compactObj(this.formProcess(values))
+        ).subscribe(res => {
           console.log(res)
           // TODO: 跳转到confirm页面带id
         })
       }
     })
   }
+  
   /**
    * 获取部门树或者项目中心列表数据
    *
@@ -244,7 +287,12 @@ class HotelTicketPreOrderFill extends PureComponent {
       switch (params.type) {
         case '1':
           this.setState({
-            departmentTree: depTreeTransform(res.data.org_unit_list || [], 'name', 'id', 'id')
+            departmentTree: depTreeTransform(
+              res.data.org_unit_list || [],
+              'name',
+              'id',
+              'id'
+            )
           })
           break
         case '2':
@@ -272,7 +320,11 @@ class HotelTicketPreOrderFill extends PureComponent {
     this.orgList({ type: '1' })
     const { params, location } = this.props
 
-    searchWithQS(hotelBasicInfo, { redis_id: location.query.redisId, plan_code: params.id, room_code: location.query.roomCode }).subscribe(res => {
+    searchWithQS(hotelBasicInfo, {
+      redis_id: location.query.redisId,
+      plan_code: params.id,
+      room_code: location.query.roomCode
+    }).subscribe(res => {
       this.setState({
         brefInfo: res.data
       })
@@ -287,7 +339,15 @@ class HotelTicketPreOrderFill extends PureComponent {
       wrapperCol: { span: 3 }
     }
 
-    const { selectedCompany, departmentTree, costCenter, roomCount, approveInfoList, approveAdditionInfo, brefInfo } = this.state
+    const {
+      selectedCompany,
+      departmentTree,
+      costCenter,
+      roomCount,
+      approveInfoList,
+      approveAdditionInfo,
+      brefInfo
+    } = this.state
     const person = this.preOrderEmployeeInfo || {}
 
     return (
@@ -300,16 +360,16 @@ class HotelTicketPreOrderFill extends PureComponent {
           </Col>
         </Row>
         <br />
-        <Row type='flex' gutter={rowGutter}>
+        <Row type="flex" gutter={rowGutter}>
           <Col span={18}>
             <Form onSubmit={this.handleSubmit}>
-              <div className='paddingContainer'>
-                <Row type='flex' gutter={rowGutter}>
+              <div className="paddingContainer">
+                <Row type="flex" gutter={rowGutter}>
                   <Col span={2}>
                     {roomInfo}
                   </Col>
                   <Col span={20}>
-                    <Row type='flex' gutter={rowGutter}>
+                    <Row type="flex" gutter={rowGutter}>
                       <Col span={24}>
                         <FormItem
                           colon={false}
@@ -321,16 +381,26 @@ class HotelTicketPreOrderFill extends PureComponent {
                         >
                           <div>
                             <span style={{ marginRight: 10 }}>
-                              {location.query.begin_date} 至 {location.query.end_date}
+                              {location.query.begin_date} 至{' '}
+                              {location.query.end_date}
                             </span>
-                            {parseInt(moment(location.query.end_date).from(moment(location.query.begin_date), true))}晚
+                            {parseInt(
+                              moment(location.query.end_date).from(
+                                moment(location.query.begin_date),
+                                true
+                              )
+                            )}晚
                           </div>
                         </FormItem>
                       </Col>
                     </Row>
-                    <Row type='flex' gutter={rowGutter}>
+                    <Row type="flex" gutter={rowGutter}>
                       <Col span={24}>
-                        <FormItem colon={false} {...formItemLayout} label={roomNum}>
+                        <FormItem
+                          colon={false}
+                          {...formItemLayout}
+                          label={roomNum}
+                        >
                           {getFieldDecorator(`room_count`, {
                             initialValue: '1',
                             rules: [
@@ -348,15 +418,22 @@ class HotelTicketPreOrderFill extends PureComponent {
                               )}
                             </Select>
                           )}
-                          <div className='pendingRight'>
-                            {hotelFee} <span className={s.redText}>¥12312 {leftAmount(4)}</span>
+                          <div className="pendingRight">
+                            {hotelFee}{' '}
+                            <span className={s.redText}>
+                              ¥12312 {leftAmount(4)}
+                            </span>
                           </div>
                         </FormItem>
                       </Col>
                     </Row>
-                    <Row type='flex' gutter={rowGutter}>
+                    <Row type="flex" gutter={rowGutter}>
                       <Col span={24}>
-                        <FormItem colon={false} {...formItemLayout} label={reachHotelTime}>
+                        <FormItem
+                          colon={false}
+                          {...formItemLayout}
+                          label={reachHotelTime}
+                        >
                           {getFieldDecorator(`arrival_time`, {
                             rules: [
                               {
@@ -371,13 +448,13 @@ class HotelTicketPreOrderFill extends PureComponent {
                   </Col>
                 </Row>
                 <hr />
-                <div className='row_space' />
-                <Row type='flex' gutter={rowGutter}>
+                <div className="row_space" />
+                <Row type="flex" gutter={rowGutter}>
                   <Col span={2}>
                     {preOrderInfo}
                   </Col>
                   <Col span={20}>
-                    <Row type='flex' gutter={rowGutter}>
+                    <Row type="flex" gutter={rowGutter}>
                       <Col span={24}>
                         <FormItem
                           colon={false}
@@ -394,9 +471,15 @@ class HotelTicketPreOrderFill extends PureComponent {
                                 message: `${pleaseSelect}${companyName}`
                               }
                             ]
-                          })(<CompanyAutoComplete getCompany={this.getCompany} />)}
-                          <div className='pendingRight'>
-                            <Button onClick={this.selectEmployee('preOrderPerson')} disabled={!selectedCompany} type='primary'>
+                          })(
+                            <CompanyAutoComplete getCompany={this.getCompany} />
+                          )}
+                          <div className="pendingRight">
+                            <Button
+                              onClick={this.selectEmployee('preOrderPerson')}
+                              disabled={!selectedCompany}
+                              type="primary"
+                            >
                               {select}
                               {preOrderPerson}
                             </Button>
@@ -404,7 +487,7 @@ class HotelTicketPreOrderFill extends PureComponent {
                         </FormItem>
                       </Col>
                     </Row>
-                    <Row type='flex' gutter={rowGutter}>
+                    <Row type="flex" gutter={rowGutter}>
                       <Col span={8}>
                         <FormItem
                           colon={false}
@@ -466,8 +549,8 @@ class HotelTicketPreOrderFill extends PureComponent {
                   </Col>
                 </Row>
                 <hr />
-                <div className='row_space' />
-                <Row type='flex' gutter={rowGutter}>
+                <div className="row_space" />
+                <Row type="flex" gutter={rowGutter}>
                   <Col span={2}>
                     {approveInfo}
                   </Col>
@@ -499,8 +582,13 @@ class HotelTicketPreOrderFill extends PureComponent {
                                       <RadioGroup>
                                         {approveInfoList.map((v, i) =>
                                           <Radio key={v.id} value={v.id}>
-                                            <div style={{ display: 'table-cell' }}>
-                                              <Row type='flex' gutter={rowGutter}>
+                                            <div
+                                              style={{ display: 'table-cell' }}
+                                            >
+                                              <Row
+                                                type="flex"
+                                                gutter={rowGutter}
+                                              >
                                                 <Col>
                                                   {approveOrderId}:{v.id}
                                                 </Col>
@@ -511,33 +599,42 @@ class HotelTicketPreOrderFill extends PureComponent {
                                                   申请人手机号:{person.phone_num}
                                                 </Col>
                                                 <Col>
-                                                  {destinationName}: {v.city_range}
+                                                  {destinationName}:{' '}
+                                                  {v.city_range}
                                                 </Col>
                                                 <Col>
                                                   {inOutDate}: {v.time_range}
                                                 </Col>
                                                 <Col>
-                                                  <div className='greenColor'>
+                                                  <div className="greenColor">
                                                     {valid}
                                                   </div>
                                                 </Col>
                                               </Row>
-                                              {(v.trip_guest_list || []).map((p, i) =>
-                                                <Row key={i} type='flex' gutter={rowGutter}>
-                                                  <Col>
-                                                    {`${traveller},${name}`}: {p.name}
-                                                  </Col>
-                                                  <Col>
-                                                    {`${traveller}${phone}`}: {p.phone}
-                                                  </Col>
-                                                  <Col>
-                                                    {`${traveller}${cardType}`}: {getOrElse(undefined, ['id_type', 'value'], p)}
-                                                  </Col>
-                                                  <Col>
-                                                    {`${traveller}${cardNo}`}:{p.id_number}{' '}
-                                                  </Col>
-                                                </Row>
-                                              )}
+                                              {(v.trip_guest_list || [])
+                                                .map((p, i) =>
+                                                  <Row
+                                                    key={i}
+                                                    type="flex"
+                                                    gutter={rowGutter}
+                                                  >
+                                                    <Col>
+                                                      {`${traveller},${name}`}:{' '}
+                                                      {p.name}
+                                                    </Col>
+                                                    <Col>
+                                                      {`${traveller}${phone}`}:{' '}
+                                                      {p.phone}
+                                                    </Col>
+                                                    <Col>
+                                                      {`${traveller}${cardType}`}:{' '}
+                                                      {getOrElse(undefined, ['id_type', 'value'], p)}
+                                                    </Col>
+                                                    <Col>
+                                                      {`${traveller}${cardNo}`}:{p.id_number}{' '}
+                                                    </Col>
+                                                  </Row>
+                                                )}
                                             </div>
                                           </Radio>
                                         )}
@@ -554,7 +651,7 @@ class HotelTicketPreOrderFill extends PureComponent {
                                 wrapperCol: { span: 24 }
                               }}
                             >
-                              <span className='red'>
+                              <span className="red">
                                 {hotelApproveTips2}
                               </span>
                             </FormItem>
@@ -579,62 +676,68 @@ class HotelTicketPreOrderFill extends PureComponent {
                   </Col>
                 </Row>
                 <hr />
-                <div className='row_space' />
-                <Row type='flex' gutter={rowGutter}>
+                <div className="row_space" />
+                <Row type="flex" gutter={rowGutter}>
                   <Col span={2}>
                     {occupancyInfo}
                   </Col>
                   <Col span={20}>
-                    {Array(parseInt(form.getFieldValue('room_count'))).fill(1).map((v, i) =>
-                      <Row key={i} type='flex' gutter={rowGutter}>
-                        <Col span={10}>
-                          <FormItem
-                            colon={false}
-                            {...{
-                              labelCol: { span: 5 },
-                              wrapperCol: { span: 19 }
-                            }}
-                            label={`${name}${i + 1}`}
-                          >
-                            {getFieldDecorator(`guestName${i}`, {
-                              rules: [
-                                {
-                                  required: true,
-                                  message: `${pleaseInput}`
-                                }
-                              ]
-                            })(<Input />)}
-                          </FormItem>
-                        </Col>
-                        <Col span={10}>
-                          <FormItem
-                            colon={false}
-                            {...{
-                              labelCol: { span: 4 },
-                              wrapperCol: { span: 20 }
-                            }}
-                            label={`${phone}${i + 1}`}
-                          >
-                            {getFieldDecorator(`guestPhone${i}`)(<Input />)}
-                          </FormItem>
-                        </Col>
-                        <Col>
-                          <Button onClick={this.selectEmployee('guest', i)} disabled={!selectedCompany} type='primary'>
-                            {select}
-                          </Button>
-                        </Col>
-                      </Row>
-                    )}
+                    {Array(parseInt(form.getFieldValue('room_count')))
+                      .fill(1)
+                      .map((v, i) =>
+                        <Row key={i} type="flex" gutter={rowGutter}>
+                          <Col span={10}>
+                            <FormItem
+                              colon={false}
+                              {...{
+                                labelCol: { span: 5 },
+                                wrapperCol: { span: 19 }
+                              }}
+                              label={`${name}${i + 1}`}
+                            >
+                              {getFieldDecorator(`guestName${i}`, {
+                                rules: [
+                                  {
+                                    required: true,
+                                    message: `${pleaseInput}`
+                                  }
+                                ]
+                              })(<Input />)}
+                            </FormItem>
+                          </Col>
+                          <Col span={10}>
+                            <FormItem
+                              colon={false}
+                              {...{
+                                labelCol: { span: 4 },
+                                wrapperCol: { span: 20 }
+                              }}
+                              label={`${phone}${i + 1}`}
+                            >
+                              {getFieldDecorator(`guestPhone${i}`)(<Input />)}
+                            </FormItem>
+                          </Col>
+                          <Col>
+                            <Button
+                              onClick={this.selectEmployee('guest', i)}
+                              disabled={!selectedCompany}
+                              type="primary"
+                            >
+                              {select}
+                            </Button>
+                          </Col>
+                        </Row>
+                      )}
                   </Col>
                 </Row>
                 <hr />
-                <div className='row_space' />
-                <Row type='flex' gutter={rowGutter}>
+                <div className="row_space" />
+                <Row type="flex" gutter={rowGutter}>
                   <Col span={2}>
                     {insurance}
                   </Col>
                   <Col span={20}>
-                    <Row type='flex' justify='space-between'>
+                    <Row type="flex" justify="space-between">
                       <Col span={10}>
                         <FormItem
                           colon={false}
@@ -655,7 +758,7 @@ class HotelTicketPreOrderFill extends PureComponent {
                       </Col>
                     </Row>
 
-                    <Row type='flex' gutter={rowGutter}>
+                    <Row type="flex" gutter={rowGutter}>
                       <Col span={10}>
                         <FormItem
                           colon={false}
@@ -695,12 +798,16 @@ class HotelTicketPreOrderFill extends PureComponent {
                         </FormItem>
                       </Col>
                       <Col>
-                        <Button onClick={this.selectEmployee('insurance')} disabled={!selectedCompany} type='primary'>
+                        <Button
+                          onClick={this.selectEmployee('insurance')}
+                          disabled={!selectedCompany}
+                          type="primary"
+                        >
                           {select}
                         </Button>
                       </Col>
                     </Row>
-                    <Row type='flex' gutter={rowGutter}>
+                    <Row type="flex" gutter={rowGutter}>
                       <Col span={10}>
                         <FormItem
                           colon={false}
@@ -748,7 +855,7 @@ class HotelTicketPreOrderFill extends PureComponent {
                         </FormItem>
                       </Col>
                     </Row>
-                    <Row type='flex' gutter={rowGutter}>
+                    <Row type="flex" gutter={rowGutter}>
                       <Col span={10}>
                         <FormItem
                           colon={false}
@@ -792,20 +899,20 @@ class HotelTicketPreOrderFill extends PureComponent {
                                 message: `${pleaseInput}${birtyday}`
                               }
                             ]
-                          })(<DatePicker size='large' />)}
+                          })(<DatePicker size="large" />)}
                         </FormItem>
                       </Col>
                     </Row>
                   </Col>
                 </Row>
                 <hr />
-                <div className='row_space' />
-                <Row type='flex' gutter={rowGutter}>
+                <div className="row_space" />
+                <Row type="flex" gutter={rowGutter}>
                   <Col span={2}>
                     {contactMethod}
                   </Col>
                   <Col span={20}>
-                    <Row type='flex' gutter={rowGutter}>
+                    <Row type="flex" gutter={rowGutter}>
                       <Col span={10}>
                         <FormItem
                           colon={false}
@@ -842,8 +949,12 @@ class HotelTicketPreOrderFill extends PureComponent {
                               }
                             ]
                           })(<Input />)}
-                          <div className='pendingRight'>
-                            <Button onClick={this.selectEmployee('contact')} disabled={!selectedCompany} type='primary'>
+                          <div className="pendingRight">
+                            <Button
+                              onClick={this.selectEmployee('contact')}
+                              disabled={!selectedCompany}
+                              type="primary"
+                            >
                               {select}
                             </Button>
                           </div>
@@ -853,13 +964,13 @@ class HotelTicketPreOrderFill extends PureComponent {
                   </Col>
                 </Row>
                 <hr />
-                <div className='row_space' />
-                <Row type='flex' gutter={rowGutter}>
+                <div className="row_space" />
+                <Row type="flex" gutter={rowGutter}>
                   <Col span={2}>
                     {costAttribute}
                   </Col>
                   <Col span={20}>
-                    <Row type='flex' gutter={rowGutter}>
+                    <Row type="flex" gutter={rowGutter}>
                       <Col span={10}>
                         <FormItem
                           colon={false}
@@ -878,7 +989,10 @@ class HotelTicketPreOrderFill extends PureComponent {
                               }
                             ]
                           })(
-                            <Select onChange={this.toggleCostType} disabled={!selectedCompany}>
+                            <Select
+                              onChange={this.toggleCostType}
+                              disabled={!selectedCompany}
+                            >
                               {costAttributeTypeEnum.map((v, i) =>
                                 <Option key={v.key} value={v.key}>
                                   {v.value}
@@ -908,7 +1022,10 @@ class HotelTicketPreOrderFill extends PureComponent {
                                 <TreeSelect
                                   disabled={!selectedCompany}
                                   style={{ width: 300 }}
-                                  dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+                                  dropdownStyle={{
+                                    maxHeight: 400,
+                                    overflow: 'auto'
+                                  }}
                                   treeData={departmentTree}
                                   treeDefaultExpandAll
                                 />
@@ -935,19 +1052,24 @@ class HotelTicketPreOrderFill extends PureComponent {
                   </Col>
                 </Row>
               </div>
-              <div className='row_space' />
-              <div className='row_space' />
-              <Row type='flex'>
+              <div className="row_space" />
+              <div className="row_space" />
+              <Row type="flex">
                 <Col span={rowGutter}>
-                  <div onClick={() => goBack()} className='linkLikeText'>
-                    <Icon type='left' />
+                  <div onClick={() => goBack()} className="linkLikeText">
+                    <Icon type="left" />
                     {reselectRoom}
                   </div>
                 </Col>
                 <Col span={rowGutter}>
-                  <Row type='flex' align='center'>
+                  <Row type="flex" align="center">
                     <Col>
-                      <Button disabled={!selectedCompany} size='large' htmlType='submit' type='primary'>
+                      <Button
+                        disabled={!selectedCompany}
+                        size="large"
+                        htmlType="submit"
+                        type="primary"
+                      >
                         {nextStep},{hotelPreOrderSteps[1]}
                       </Button>
                     </Col>
@@ -957,7 +1079,12 @@ class HotelTicketPreOrderFill extends PureComponent {
             </Form>
           </Col>
           <HotelBrefSection
-            duration={parseInt(moment(location.query.end_date).from(moment(location.query.begin_date), true))}
+            duration={parseInt(
+              moment(location.query.end_date).from(
+                moment(location.query.begin_date),
+                true
+              )
+            )}
             roomCount={parseInt(form.getFieldValue('room_count'))}
             brefInfo={brefInfo}
             insurancePrice={222}
@@ -975,7 +1102,7 @@ class HotelTicketPreOrderFill extends PureComponent {
           {this.state.singleEmployeeModalShow
             ? <SingleEmployeeModal
                 rowSelection={this.rowSelection}
-                ref='singleEmployeeModal'
+                ref="singleEmployeeModal"
                 baseUrl={employeeList}
                 params={{ companyId: 'testid' }}
               />
