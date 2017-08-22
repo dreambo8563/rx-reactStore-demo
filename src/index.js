@@ -10,6 +10,7 @@ import moment from 'moment';
 import 'moment/locale/zh-cn';
 moment.locale('zh-cn');
 import 'babel-polyfill'
+
 if (process.env.NODE_ENV === 'production') {
   ;(function() {
     if ('serviceWorker' in navigator) {
