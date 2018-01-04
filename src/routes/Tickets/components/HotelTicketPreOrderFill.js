@@ -178,10 +178,12 @@ class HotelTicketPreOrderFill extends PureComponent {
           break
         case 'guest':
           form.setFieldsValue({
-            [`guestName${this.employeeModalInfo
-              .index}`]: selectedData.employee_name,
-            [`guestPhone${this.employeeModalInfo
-              .index}`]: selectedData.phone_num
+            [`guestName${
+              this.employeeModalInfo.index
+            }`]: selectedData.employee_name,
+            [`guestPhone${
+              this.employeeModalInfo.index
+            }`]: selectedData.phone_num
           })
           break
         case 'insurance':
@@ -217,7 +219,7 @@ class HotelTicketPreOrderFill extends PureComponent {
       [field]: true
     })
   }
-  
+
   /**
    * 重新组合post数据
    *
@@ -275,7 +277,7 @@ class HotelTicketPreOrderFill extends PureComponent {
       }
     })
   }
-  
+
   /**
    * 获取部门树或者项目中心列表数据
    *
@@ -365,9 +367,7 @@ class HotelTicketPreOrderFill extends PureComponent {
             <Form onSubmit={this.handleSubmit}>
               <div className="paddingContainer">
                 <Row type="flex" gutter={rowGutter}>
-                  <Col span={2}>
-                    {roomInfo}
-                  </Col>
+                  <Col span={2}>{roomInfo}</Col>
                   <Col span={20}>
                     <Row type="flex" gutter={rowGutter}>
                       <Col span={24}>
@@ -411,11 +411,13 @@ class HotelTicketPreOrderFill extends PureComponent {
                             ]
                           })(
                             <Select>
-                              {Array(parseInt(roomCount)).fill(1).map((v, i) =>
-                                <Option key={i} value={String(i + 1)}>
-                                  {i + 1}
-                                </Option>
-                              )}
+                              {Array(parseInt(roomCount))
+                                .fill(1)
+                                .map((v, i) => (
+                                  <Option key={i} value={String(i + 1)}>
+                                    {i + 1}
+                                  </Option>
+                                ))}
                             </Select>
                           )}
                           <div className="pendingRight">
@@ -450,9 +452,7 @@ class HotelTicketPreOrderFill extends PureComponent {
                 <hr />
                 <div className="row_space" />
                 <Row type="flex" gutter={rowGutter}>
-                  <Col span={2}>
-                    {preOrderInfo}
-                  </Col>
+                  <Col span={2}>{preOrderInfo}</Col>
                   <Col span={20}>
                     <Row type="flex" gutter={rowGutter}>
                       <Col span={24}>
@@ -551,140 +551,146 @@ class HotelTicketPreOrderFill extends PureComponent {
                 <hr />
                 <div className="row_space" />
                 <Row type="flex" gutter={rowGutter}>
-                  <Col span={2}>
-                    {approveInfo}
-                  </Col>
+                  <Col span={2}>{approveInfo}</Col>
                   <Col span={20}>
-                    {approveAdditionInfo
-                      ? approveAdditionInfo.is_need === 1
-                        ? approveAdditionInfo.is_exists === 1
-                          ? approveInfoList.length > 0
-                            ? <div>
-                                <Row>
-                                  {hotelApproveTips3}
-                                </Row>
-                                <Row>
-                                  <FormItem
-                                    colon={false}
-                                    {...{
-                                      labelCol: { span: 0 },
-                                      wrapperCol: { span: 24 }
-                                    }}
-                                  >
-                                    {getFieldDecorator(`trip_ids`, {
-                                      rules: [
-                                        {
-                                          required: true,
-                                          message: `${pleaseSelect}${approveInfo}`
-                                        }
-                                      ]
-                                    })(
-                                      <RadioGroup>
-                                        {approveInfoList.map((v, i) =>
-                                          <Radio key={v.id} value={v.id}>
-                                            <div
-                                              style={{ display: 'table-cell' }}
-                                            >
-                                              <Row
-                                                type="flex"
-                                                gutter={rowGutter}
-                                              >
-                                                <Col>
-                                                  {approveOrderId}:{v.id}
-                                                </Col>
-                                                <Col>
-                                                  申请人姓名:{person.employee_name}
-                                                </Col>
-                                                <Col>
-                                                  申请人手机号:{person.phone_num}
-                                                </Col>
-                                                <Col>
-                                                  {destinationName}:{' '}
-                                                  {v.city_range}
-                                                </Col>
-                                                <Col>
-                                                  {inOutDate}: {v.time_range}
-                                                </Col>
-                                                <Col>
-                                                  <div className="greenColor">
-                                                    {valid}
-                                                  </div>
-                                                </Col>
-                                              </Row>
-                                              {(v.trip_guest_list || [])
-                                                .map((p, i) =>
-                                                  <Row
-                                                    key={i}
-                                                    type="flex"
-                                                    gutter={rowGutter}
-                                                  >
-                                                    <Col>
-                                                      {`${traveller},${name}`}:{' '}
-                                                      {p.name}
-                                                    </Col>
-                                                    <Col>
-                                                      {`${traveller}${phone}`}:{' '}
-                                                      {p.phone}
-                                                    </Col>
-                                                    <Col>
-                                                      {`${traveller}${cardType}`}:{' '}
-                                                      {getOrElse(undefined, ['id_type', 'value'], p)}
-                                                    </Col>
-                                                    <Col>
-                                                      {`${traveller}${cardNo}`}:{p.id_number}{' '}
-                                                    </Col>
-                                                  </Row>
-                                                )}
-                                            </div>
-                                          </Radio>
-                                        )}
-                                      </RadioGroup>
-                                    )}
-                                  </FormItem>
-                                </Row>
-                              </div>
-                            : undefined
-                          : <FormItem
-                              colon={false}
-                              {...{
-                                labelCol: { span: 0 },
-                                wrapperCol: { span: 24 }
-                              }}
-                            >
-                              <span className="red">
-                                {hotelApproveTips2}
-                              </span>
-                            </FormItem>
-                        : <FormItem
+                    {approveAdditionInfo ? (
+                      approveAdditionInfo.is_need === 1 ? (
+                        approveAdditionInfo.is_exists === 1 ? (
+                          approveInfoList.length > 0 ? (
+                            <div>
+                              <Row>{hotelApproveTips3}</Row>
+                              <Row>
+                                <FormItem
+                                  colon={false}
+                                  {...{
+                                    labelCol: { span: 0 },
+                                    wrapperCol: { span: 24 }
+                                  }}
+                                >
+                                  {getFieldDecorator(`trip_ids`, {
+                                    rules: [
+                                      {
+                                        required: true,
+                                        message: `${pleaseSelect}${approveInfo}`
+                                      }
+                                    ]
+                                  })(
+                                    <RadioGroup>
+                                      {approveInfoList.map((v, i) => (
+                                        <Radio key={v.id} value={v.id}>
+                                          <div
+                                            style={{ display: 'table-cell' }}
+                                          >
+                                            <Row type="flex" gutter={rowGutter}>
+                                              <Col>
+                                                {approveOrderId}:{v.id}
+                                              </Col>
+                                              <Col>
+                                                申请人姓名:{
+                                                  person.employee_name
+                                                }
+                                              </Col>
+                                              <Col>
+                                                申请人手机号:{person.phone_num}
+                                              </Col>
+                                              <Col>
+                                                {destinationName}:{' '}
+                                                {v.city_range}
+                                              </Col>
+                                              <Col>
+                                                {inOutDate}: {v.time_range}
+                                              </Col>
+                                              <Col>
+                                                <div className="greenColor">
+                                                  {valid}
+                                                </div>
+                                              </Col>
+                                            </Row>
+                                            {(v.trip_guest_list || []).map(
+                                              (p, i) => (
+                                                <Row
+                                                  key={i}
+                                                  type="flex"
+                                                  gutter={rowGutter}
+                                                >
+                                                  <Col>
+                                                    {`${traveller},${name}`}:{' '}
+                                                    {p.name}
+                                                  </Col>
+                                                  <Col>
+                                                    {`${traveller}${phone}`}:{' '}
+                                                    {p.phone}
+                                                  </Col>
+                                                  <Col>
+                                                    {`${traveller}${cardType}`}:{' '}
+                                                    {getOrElse(
+                                                      undefined,
+                                                      ['id_type', 'value'],
+                                                      p
+                                                    )}
+                                                  </Col>
+                                                  <Col>
+                                                    {`${traveller}${cardNo}`}:{
+                                                      p.id_number
+                                                    }{' '}
+                                                  </Col>
+                                                </Row>
+                                              )
+                                            )}
+                                          </div>
+                                        </Radio>
+                                      ))}
+                                    </RadioGroup>
+                                  )}
+                                </FormItem>
+                              </Row>
+                            </div>
+                          ) : (
+                            undefined
+                          )
+                        ) : (
+                          <FormItem
                             colon={false}
                             {...{
                               labelCol: { span: 0 },
                               wrapperCol: { span: 24 }
                             }}
                           >
-                            {hotelApproveTips1}
+                            <span className="red">{hotelApproveTips2}</span>
                           </FormItem>
-                      : <FormItem
+                        )
+                      ) : (
+                        <FormItem
                           colon={false}
                           {...{
                             labelCol: { span: 0 },
                             wrapperCol: { span: 24 }
                           }}
                         >
-                          {hotelApproveTips}
-                        </FormItem>}
+                          {hotelApproveTips1}
+                        </FormItem>
+                      )
+                    ) : (
+                      <FormItem
+                        colon={false}
+                        {...{
+                          labelCol: { span: 0 },
+                          wrapperCol: { span: 24 }
+                        }}
+                      >
+                        {hotelApproveTips}
+                      </FormItem>
+                    )}
                   </Col>
                 </Row>
                 <hr />
                 <div className="row_space" />
                 <Row type="flex" gutter={rowGutter}>
-                  <Col span={2}>
-                    {occupancyInfo}
-                  </Col>
+                  <Col span={2}>{occupancyInfo}</Col>
                   <Col span={20}>
                     {Array(parseInt(form.getFieldValue('room_count')))
                       .fill(1)
-                      .map((v, i) =>
+                      .map((v, i) => (
                         <Row key={i} type="flex" gutter={rowGutter}>
                           <Col span={10}>
                             <FormItem
@@ -727,15 +733,13 @@ class HotelTicketPreOrderFill extends PureComponent {
                             </Button>
                           </Col>
                         </Row>
-                      )}
+                      ))}
                   </Col>
                 </Row>
                 <hr />
                 <div className="row_space" />
                 <Row type="flex" gutter={rowGutter}>
-                  <Col span={2}>
-                    {insurance}
-                  </Col>
+                  <Col span={2}>{insurance}</Col>
                   <Col span={20}>
                     <Row type="flex" justify="space-between">
                       <Col span={10}>
@@ -747,9 +751,7 @@ class HotelTicketPreOrderFill extends PureComponent {
                           }}
                         >
                           {getFieldDecorator(`is_checked`)(
-                            <Checkbox>
-                              {hotelCancelInsurance}
-                            </Checkbox>
+                            <Checkbox>{hotelCancelInsurance}</Checkbox>
                           )}
                         </FormItem>
                       </Col>
@@ -826,11 +828,11 @@ class HotelTicketPreOrderFill extends PureComponent {
                             ]
                           })(
                             <Select>
-                              {certificateType.map((v, i) =>
+                              {certificateType.map((v, i) => (
                                 <Option key={v.key} value={v.key}>
                                   {v.value}
                                 </Option>
-                              )}
+                              ))}
                             </Select>
                           )}
                         </FormItem>
@@ -874,11 +876,11 @@ class HotelTicketPreOrderFill extends PureComponent {
                             ]
                           })(
                             <RadioGroup>
-                              {sexEnum.map((v, i) =>
+                              {sexEnum.map((v, i) => (
                                 <Radio key={v.key} value={v.key}>
                                   {v.value}
                                 </Radio>
-                              )}
+                              ))}
                             </RadioGroup>
                           )}
                         </FormItem>
@@ -908,9 +910,7 @@ class HotelTicketPreOrderFill extends PureComponent {
                 <hr />
                 <div className="row_space" />
                 <Row type="flex" gutter={rowGutter}>
-                  <Col span={2}>
-                    {contactMethod}
-                  </Col>
+                  <Col span={2}>{contactMethod}</Col>
                   <Col span={20}>
                     <Row type="flex" gutter={rowGutter}>
                       <Col span={10}>
@@ -966,9 +966,7 @@ class HotelTicketPreOrderFill extends PureComponent {
                 <hr />
                 <div className="row_space" />
                 <Row type="flex" gutter={rowGutter}>
-                  <Col span={2}>
-                    {costAttribute}
-                  </Col>
+                  <Col span={2}>{costAttribute}</Col>
                   <Col span={20}>
                     <Row type="flex" gutter={rowGutter}>
                       <Col span={10}>
@@ -993,11 +991,11 @@ class HotelTicketPreOrderFill extends PureComponent {
                               onChange={this.toggleCostType}
                               disabled={!selectedCompany}
                             >
-                              {costAttributeTypeEnum.map((v, i) =>
+                              {costAttributeTypeEnum.map((v, i) => (
                                 <Option key={v.key} value={v.key}>
                                   {v.value}
                                 </Option>
-                              )}
+                              ))}
                             </Select>
                           )}
                         </FormItem>
@@ -1039,11 +1037,11 @@ class HotelTicketPreOrderFill extends PureComponent {
                                 ]
                               })(
                                 <Select disabled={!selectedCompany}>
-                                  {costCenter.map((v, i) =>
+                                  {costCenter.map((v, i) => (
                                     <Option key={v.id} value={v.id}>
                                       {v.name}
                                     </Option>
-                                  )}
+                                  ))}
                                 </Select>
                               )}
                         </FormItem>
@@ -1099,14 +1097,16 @@ class HotelTicketPreOrderFill extends PureComponent {
           onOk={this.handleOk}
           onCancel={this.handleCancel('singleEmployeeModalShow')}
         >
-          {this.state.singleEmployeeModalShow
-            ? <SingleEmployeeModal
-                rowSelection={this.rowSelection}
-                ref="singleEmployeeModal"
-                baseUrl={employeeList}
-                params={{ companyId: 'testid' }}
-              />
-            : undefined}
+          {this.state.singleEmployeeModalShow ? (
+            <SingleEmployeeModal
+              rowSelection={this.rowSelection}
+              ref="singleEmployeeModal"
+              baseUrl={employeeList}
+              params={{ companyId: 'testid' }}
+            />
+          ) : (
+            undefined
+          )}
         </Modal>
       </div>
     )

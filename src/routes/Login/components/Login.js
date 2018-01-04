@@ -31,32 +31,26 @@ class Login extends PureComponent {
   }
 
   /**
-     * 提交Form 验证
-     *
-     *
-     * @memberof Login
-     */
+   * 提交Form 验证
+   *
+   *
+   * @memberof Login
+   */
   handleSubmit = e => {
     e.preventDefault()
-    this.props.form.validateFields((err, values) => {
-      if (err) {
-        // 如果验证不通过需要把焦点落到第一个不符合的表单项中
-        const field = err[Object.keys(err)[0]].errors[0].field
-        const errorRefs = this.props.form.getFieldInstance(field).refs
-        errorRefs[Object.keys(errorRefs)[0]].focus()
-      }
+    this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         this.login(values)
       }
     })
   }
   /**
-     *
-     * 登录post
-     * @param {any} data
-     *
-     * @memberof Login
-     */
+   *
+   * 登录post
+   * @param {any} data
+   *
+   * @memberof Login
+   */
   login(data) {
     jsonPost(login, data).subscribe(res => {
       const { userName, phoneNum, token } = res.data
@@ -77,11 +71,9 @@ class Login extends PureComponent {
     return (
       <Layout>
         <Content className={s.bg}>
-          <Row gutter={80} type='flex' justify='space-around' align='middle'>
+          <Row gutter={80} type="flex" justify="space-around" align="middle">
             <Form className={s.login_form}>
-              <h3 className={s.login_form_sysName}>
-                {systemName}
-              </h3>
+              <h3 className={s.login_form_sysName}>{systemName}</h3>
               <FormItem>
                 {getFieldDecorator('phone', {
                   rules: [
@@ -92,7 +84,7 @@ class Login extends PureComponent {
                   ]
                 })(
                   <Input
-                    prefix={<Icon type='phone' style={{ fontSize: 13 }} />}
+                    prefix={<Icon type="phone" style={{ fontSize: 13 }} />}
                     placeholder={phone}
                   />
                 )}
@@ -107,38 +99,39 @@ class Login extends PureComponent {
                   ]
                 })(
                   <Input
-                    prefix={<Icon type='lock' style={{ fontSize: 13 }} />}
-                    type='password'
+                    prefix={<Icon type="lock" style={{ fontSize: 13 }} />}
+                    type="password"
                     placeholder={password}
                   />
                 )}
               </FormItem>
               <FormItem>
-
                 <Button
                   onClick={::this.handleSubmit}
-                  type='primary'
-                  htmlType='submit'
+                  type="primary"
+                  htmlType="submit"
                   className={s.login_form_button}
                 >
                   登录
                 </Button>
-                意见反馈：<a href='mailto:rd@fenbeitong.com'>rd@fenbeitong.com</a>
+                意见反馈：<a href="mailto:rd@fenbeitong.com">
+                  rd@fenbeitong.com
+                </a>
               </FormItem>
             </Form>
-            <img src={line} alt='' />
+            <img src={line} alt="" />
             <Col className={s.login_form_images}>
               <Row>
-                <img src={slogan} alt='' />
+                <img src={slogan} alt="" />
               </Row>
-              <div className='row_space' />
+              <div className="row_space" />
               <Row>
-                <img src={qrcode} alt='' />
+                <img src={qrcode} alt="" />
               </Row>
             </Col>
           </Row>
         </Content>
-        <Footer className='footer'>
+        <Footer className="footer">
           © 2016-2017 北京分贝金服科技有限公司 京ICP备15043845号-2
         </Footer>
       </Layout>

@@ -76,11 +76,15 @@ class EvaluateList extends PureComponent {
     }
     // 合作方式枚举下拉node
     this.coporateTypeOptions = coporateType.map((v, i) => (
-      <Option key={i} value={v.key}>{v.value}</Option>
+      <Option key={i} value={v.key}>
+        {v.value}
+      </Option>
     ))
     // 合作方式枚举下拉node
     this.evaluateSourceOptions = evaluateSource.map((v, i) => (
-      <Option key={i} value={v.key}>{v.value}</Option>
+      <Option key={i} value={v.key}>
+        {v.value}
+      </Option>
     ))
     // partial 函数用自己的处理方法
     this.formDataProcess = formDataProcess(this.processFormValue)
@@ -92,14 +96,14 @@ class EvaluateList extends PureComponent {
     this.enumFormat = convertInt(['cooperatingModel', 'state', 'source'])
     // tab 右侧操作栏
     this.tabActions = (
-      <Row type='flex' gutter={rowGutter}>
+      <Row type="flex" gutter={rowGutter}>
         <Col>
-          <Button type='primary' onClick={::this.getExportUrl}>
+          <Button type="primary" onClick={::this.getExportUrl}>
             {exportText}
           </Button>
         </Col>
         <Col>
-          <Button type='primary' onClick={() => navigateTo(applyDraftPage)}>
+          <Button type="primary" onClick={() => navigateTo(applyDraftPage)}>
             {newApplyLabel}
           </Button>
         </Col>
@@ -121,7 +125,7 @@ class EvaluateList extends PureComponent {
             case 0:
               return (
                 <div
-                  className='linkLikeText'
+                  className="linkLikeText"
                   onClick={() => navigateTo(applyDraftEditPage(record.applyId))}
                 >
                   {text}
@@ -133,7 +137,7 @@ class EvaluateList extends PureComponent {
             case 11:
               return (
                 <div
-                  className='linkLikeText'
+                  className="linkLikeText"
                   onClick={() => navigateTo(applyDetailPage(record.applyId))}
                 >
                   {text}
@@ -195,7 +199,7 @@ class EvaluateList extends PureComponent {
               return (
                 <Button
                   onClick={() => navigateTo(applyDetailPage(record.applyId))}
-                  type='primary'
+                  type="primary"
                 >
                   审核
                 </Button>
@@ -204,7 +208,7 @@ class EvaluateList extends PureComponent {
               return (
                 <Button
                   onClick={() => navigateTo(applyDetailPage(record.applyId))}
-                  type='primary'
+                  type="primary"
                 >
                   开通
                 </Button>
@@ -291,28 +295,31 @@ class EvaluateList extends PureComponent {
   processFormValue(formValues) {
     var params = formValues
     const createTime = params['createTime']
-    const createTimeConfig = createTime && createTime.length === 2
-      ? {
-          beginCreateTime: createTime[0].format('YYYY-MM-DD HH:mm'),
-          endCreateTime: createTime[1].format('YYYY-MM-DD HH:mm')
-        }
-      : {}
+    const createTimeConfig =
+      createTime && createTime.length === 2
+        ? {
+            beginCreateTime: createTime[0].format('YYYY-MM-DD HH:mm'),
+            endCreateTime: createTime[1].format('YYYY-MM-DD HH:mm')
+          }
+        : {}
     delete params.createTime
     const applyTime = params['applyTime']
-    const applyTimeConfig = applyTime && applyTime.length === 2
-      ? {
-          beginApplyTime: applyTime[0].format('YYYY-MM-DD HH:mm'),
-          endApplyTime: applyTime[1].format('YYYY-MM-DD HH:mm')
-        }
-      : {}
+    const applyTimeConfig =
+      applyTime && applyTime.length === 2
+        ? {
+            beginApplyTime: applyTime[0].format('YYYY-MM-DD HH:mm'),
+            endApplyTime: applyTime[1].format('YYYY-MM-DD HH:mm')
+          }
+        : {}
     delete params.applyTime
     const lastUpdateTime = params['lastUpdateTime']
-    const lastUpdateTimeConfig = lastUpdateTime && lastUpdateTime.length === 2
-      ? {
-          beginLastUpdateTime: lastUpdateTime[0].format('YYYY-MM-DD HH:mm'),
-          endLastUpdateTime: lastUpdateTime[1].format('YYYY-MM-DD HH:mm')
-        }
-      : {}
+    const lastUpdateTimeConfig =
+      lastUpdateTime && lastUpdateTime.length === 2
+        ? {
+            beginLastUpdateTime: lastUpdateTime[0].format('YYYY-MM-DD HH:mm'),
+            endLastUpdateTime: lastUpdateTime[1].format('YYYY-MM-DD HH:mm')
+          }
+        : {}
     delete params.lastUpdateTime
 
     return {
@@ -390,7 +397,7 @@ class EvaluateList extends PureComponent {
     return (
       <div>
         <Form onSubmit={this.handleSearch}>
-          <Row justify='space-around' gutter={8}>
+          <Row justify="space-around" gutter={8}>
             <Col md={5} lg={5} xl={6}>
               <FormItem {...formItemLayout} label={searchText.companyName}>
                 {getFieldDecorator(`companyName`)(<Input />)}
@@ -406,14 +413,16 @@ class EvaluateList extends PureComponent {
                 {getFieldDecorator('createTime')(
                   <RangePicker
                     showTime={{ format: 'HH:mm' }}
-                    format='YYYY-MM-DD HH:mm'
+                    format="YYYY-MM-DD HH:mm"
                   />
                 )}
               </FormItem>
             </Col>
             <Col lg={4} xl={3}>
               <Row>
-                <Button type='primary' htmlType='submit'>{search}</Button>
+                <Button type="primary" htmlType="submit">
+                  {search}
+                </Button>
                 <a
                   style={{ marginLeft: 8, fontSize: 12 }}
                   onClick={::this.toggle}
@@ -424,84 +433,88 @@ class EvaluateList extends PureComponent {
                 </a>
               </Row>
             </Col>
-
           </Row>
-          {expand
-            ? <Row gutter={8}>
-                <Col md={5} lg={5} xl={6}>
-                  <FormItem
-                    {...formItemLayout}
-                    label={searchText.cooperatingModel}
-                  >
-                    {getFieldDecorator('cooperatingModel', {
-                      initialValue: null
-                    })(
-                      <Select placeholder={all}>
-                        {this.coporateTypeOptions}
-                      </Select>
-                    )}
-                  </FormItem>
-                </Col>
-                <Col md={5} lg={5} xl={6}>
-                  <FormItem {...formItemLayout} label={searchText.ownerPhone}>
-                    {getFieldDecorator(`ownerPhone`)(<Input />)}
-                  </FormItem>
-                </Col>
-                <Col md={9} lg={10} xl={8}>
-                  <FormItem {...formItemLayout} label={searchText.evaluateTime}>
-                    {getFieldDecorator(`applyTime`)(
-                      <RangePicker
-                        showTime={{ format: 'HH:mm' }}
-                        format='YYYY-MM-DD HH:mm'
-                      />
-                    )}
-                  </FormItem>
-                </Col>
-              </Row>
-            : undefined}
-          {expand
-            ? <Row gutter={8}>
-                <Col md={5} lg={5} xl={6}>
-                  <FormItem {...formItemLayout} label={searchText.applyId}>
-                    {getFieldDecorator(`applyId`)(<Input />)}
-                  </FormItem>
-                </Col>
-                <Col md={5} lg={5} xl={6}>
-                  <FormItem {...formItemLayout} label={tableColumn.source}>
-                    {getFieldDecorator(`source`, {
-                      initialValue: null
-                    })(
-                      <Select placeholder={all}>
-                        {this.evaluateSourceOptions}
-                      </Select>
-                    )}
-                  </FormItem>
-                </Col>
-                <Col md={9} lg={10} xl={8}>
-
-                  <FormItem
-                    {...formItemLayout}
-                    label={searchText.lastEvaluateTime}
-                  >
-                    {getFieldDecorator(`lastUpdateTime`)(
-                      <RangePicker
-                        showTime={{ format: 'HH:mm' }}
-                        format='YYYY-MM-DD HH:mm'
-                      />
-                    )}
-                  </FormItem>
-                </Col>
-              </Row>
-            : undefined}
-          {expand
-            ? <Row gutter={8}>
-                <Col md={5} lg={5} xl={6}>
-                  <FormItem {...formItemLayout} label={searchText.signName}>
-                    {getFieldDecorator('signName')(<Input />)}
-                  </FormItem>
-                </Col>
-              </Row>
-            : undefined}
+          {expand ? (
+            <Row gutter={8}>
+              <Col md={5} lg={5} xl={6}>
+                <FormItem
+                  {...formItemLayout}
+                  label={searchText.cooperatingModel}
+                >
+                  {getFieldDecorator('cooperatingModel', {
+                    initialValue: null
+                  })(
+                    <Select placeholder={all}>
+                      {this.coporateTypeOptions}
+                    </Select>
+                  )}
+                </FormItem>
+              </Col>
+              <Col md={5} lg={5} xl={6}>
+                <FormItem {...formItemLayout} label={searchText.ownerPhone}>
+                  {getFieldDecorator(`ownerPhone`)(<Input />)}
+                </FormItem>
+              </Col>
+              <Col md={9} lg={10} xl={8}>
+                <FormItem {...formItemLayout} label={searchText.evaluateTime}>
+                  {getFieldDecorator(`applyTime`)(
+                    <RangePicker
+                      showTime={{ format: 'HH:mm' }}
+                      format="YYYY-MM-DD HH:mm"
+                    />
+                  )}
+                </FormItem>
+              </Col>
+            </Row>
+          ) : (
+            undefined
+          )}
+          {expand ? (
+            <Row gutter={8}>
+              <Col md={5} lg={5} xl={6}>
+                <FormItem {...formItemLayout} label={searchText.applyId}>
+                  {getFieldDecorator(`applyId`)(<Input />)}
+                </FormItem>
+              </Col>
+              <Col md={5} lg={5} xl={6}>
+                <FormItem {...formItemLayout} label={tableColumn.source}>
+                  {getFieldDecorator(`source`, {
+                    initialValue: null
+                  })(
+                    <Select placeholder={all}>
+                      {this.evaluateSourceOptions}
+                    </Select>
+                  )}
+                </FormItem>
+              </Col>
+              <Col md={9} lg={10} xl={8}>
+                <FormItem
+                  {...formItemLayout}
+                  label={searchText.lastEvaluateTime}
+                >
+                  {getFieldDecorator(`lastUpdateTime`)(
+                    <RangePicker
+                      showTime={{ format: 'HH:mm' }}
+                      format="YYYY-MM-DD HH:mm"
+                    />
+                  )}
+                </FormItem>
+              </Col>
+            </Row>
+          ) : (
+            undefined
+          )}
+          {expand ? (
+            <Row gutter={8}>
+              <Col md={5} lg={5} xl={6}>
+                <FormItem {...formItemLayout} label={searchText.signName}>
+                  {getFieldDecorator('signName')(<Input />)}
+                </FormItem>
+              </Col>
+            </Row>
+          ) : (
+            undefined
+          )}
         </Form>
         <br />
         <br />
@@ -515,17 +528,16 @@ class EvaluateList extends PureComponent {
             <TabPane tab={v.value} key={v.key}>
               <SelectiveTable
                 dataSource={applies}
-                rowKey='applyId'
+                rowKey="applyId"
                 columns={this.ApplyListColumn}
                 pagination={paginationConfig(this.changePage, total)}
                 defaultColumns={selectedColumns}
-                first='applyId'
-                last='actions'
+                first="applyId"
+                last="actions"
               />
             </TabPane>
           ))}
         </Tabs>
-
       </div>
     )
   }

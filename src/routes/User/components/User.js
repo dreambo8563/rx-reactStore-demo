@@ -25,7 +25,7 @@ class UserChild extends PureComponent {
 }
 
 const selector = (state) => {
-    // console.log(state, 'selector');
+    console.log(state, 'selector');
     return ({itemsSelected: state.store.userState})
 };
 

@@ -7,7 +7,7 @@ import {
   hotelCancelInsurance,
   orderTotalAmount,
   bedType,
-  remark,
+  // remark,
   intent,
   floor,
   buildArea

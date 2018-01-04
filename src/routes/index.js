@@ -1,18 +1,30 @@
 // We only need to import the modules necessary for initial render
 import AppLayout from 'layouts/AppLayout'
-import { EvaluateListRoute, ApplyDraftRoute, ApplyDetailRoute } from 'modules/Evaluate'
+import {
+  EvaluateListRoute,
+  ApplyDraftRoute,
+  ApplyDetailRoute
+} from 'modules/Evaluate'
 import Login from 'modules/Login'
 import { EnterpriseListRoute, EnterpriseDetailRoute } from 'modules/Enterprise'
-import { AppointmentListRoute, RecommendCompanyListRoute, ExperienceRecordsRoute } from 'modules/Operation'
-import { HotelTicketListRoute, HotelTicketDetailRoute, HotelTicketPreOrderFillRoute, HotelTicketPreOrderConfirmRoute } from 'modules/Tickets'
+import {
+  AppointmentListRoute,
+  RecommendCompanyListRoute,
+  ExperienceRecordsRoute
+} from 'modules/Operation'
+import {
+  HotelTicketListRoute,
+  HotelTicketDetailRoute,
+  HotelTicketPreOrderFillRoute,
+  HotelTicketPreOrderConfirmRoute
+} from 'modules/Tickets'
 import { NotFound } from 'modules/Error'
 import NotFoundCom from 'modules/Error/components/NotFound'
-// import Users from 'modules/User'
+import Users from 'modules/User'
 
 import { rootPage } from 'constants/URL'
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
-
 export const createRoutes = store => [
   {
     path: rootPage,
@@ -20,6 +32,7 @@ export const createRoutes = store => [
     indexRoute: EvaluateListRoute(),
     childRoutes: [
       Login(),
+      Users(),
       ApplyDraftRoute(),
       ApplyDetailRoute(),
       EnterpriseListRoute(),

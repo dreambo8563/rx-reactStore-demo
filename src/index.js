@@ -11,14 +11,10 @@ import 'moment/locale/zh-cn'
 moment.locale('zh-cn')
 import 'babel-polyfill'
 import * as OfflinePluginRuntime from 'offline-plugin/runtime'
-OfflinePluginRuntime.install()
-// if (process.env.NODE_ENV !== 'production') {
-//   ;(function() {
-//     if ('serviceWorker' in navigator) {
-//       navigator.serviceWorker.register('/my-service-worker.js')
-//     }
-//   })()
-// }
+
+if (process.env.NODE_ENV === 'production') {
+  OfflinePluginRuntime.install()
+}
 
 const store = getStore()
 

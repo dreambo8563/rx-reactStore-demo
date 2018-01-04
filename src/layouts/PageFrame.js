@@ -5,9 +5,9 @@ import { Layout, Menu, Icon, Row } from 'antd'
 import UserEntry from './UserEntry'
 import s from './Layout.css'
 import { navTree, footerText } from 'constants/TEXT'
-import { userInfo } from 'constants/API'
-import { jsonGet } from 'utils/http'
-import { changeUserInfo } from 'shared/services'
+// import { userInfo } from 'constants/API'
+// import { jsonGet } from 'utils/http'
+// import { changeUserInfo } from 'shared/services'
 import { compactObj } from 'utils/objHelper'
 
 const { SubMenu } = Menu
@@ -35,10 +35,10 @@ class PageFrame extends PureComponent {
     })
   }
   componentDidMount() {
-    jsonGet(userInfo).subscribe(res => {
-      const { userName, phoneNum } = res.data
-      changeUserInfo({ userName, phoneNum })
-    })
+    // jsonGet(userInfo).subscribe(res => {
+    //   const { userName, phoneNum } = res.data
+    //   changeUserInfo({ userName, phoneNum })
+    // })
   }
 
   render() {
@@ -46,99 +46,104 @@ class PageFrame extends PureComponent {
     // const { openKey } = this.state
     const pathArr = compactObj(location.pathname.split('/'))
     const isRoot = pathArr.length < 1
-    const openKey = isRoot ? this.state.openKey : this.state.openKey.concat(pathArr[0])
+    const openKey = isRoot
+      ? this.state.openKey
+      : this.state.openKey.concat(pathArr[0])
     const selectedKey = isRoot ? this.state.selectedKey : pathArr[1]
     return (
       <Layout>
-        {isNotFoundPage
-          ? undefined
-          : <Sider
-              breakpoint='lg'
-              collapsedWidth='0'
-              style={{
-                overflow: 'auto'
-              }}
+        {isNotFoundPage ? (
+          undefined
+        ) : (
+          <Sider
+            breakpoint="lg"
+            collapsedWidth="0"
+            style={{
+              overflow: 'auto'
+            }}
+          >
+            <div className={s.logoContainer}>
+              <Row type="flex" justify="start">
+                <div className={s.logo}>SpaceX</div>
+              </Row>
+              <Row type="flex" justify="start">
+                <UserEntry />
+              </Row>
+            </div>
+            <Menu
+              theme="dark"
+              mode="inline"
+              onOpenChange={::this.onOpenChange}
+              defaultOpenKeys={openKey}
+              defaultSelectedKeys={[selectedKey]}
+              openKeys={openKey}
+              selectedKeys={[selectedKey]}
             >
-              <div className={s.logoContainer}>
-                <Row type='flex' justify='start'>
-                  <div className={s.logo}>SpaceX</div>
-                </Row>
-                <Row type='flex' justify='start'>
-                  <UserEntry />
-                </Row>
-              </div>
-              <Menu
-                theme='dark'
-                mode='inline'
-                onOpenChange={::this.onOpenChange}
-                defaultOpenKeys={openKey}
-                defaultSelectedKeys={[selectedKey]}
-                openKeys={openKey}
-                selectedKeys={[selectedKey]}
+              <SubMenu
+                key="uc"
+                title={
+                  <span>
+                    {' '}
+                    <Icon type="user" />
+                    {navTree.uc.title}
+                  </span>
+                }
               >
-                <SubMenu
-                  key='uc'
-                  title={
-                    <span>
-                      {' '}<Icon type='user' />
-                      {navTree.uc.title}
-                    </span>
-                  }
-                >
-                  <Menu.Item key='evaluate'>
-                    <Link to={navTree.uc.evaluate.to}>
-                      {navTree.uc.evaluate.title}
-                    </Link>
-                  </Menu.Item>
-                  <Menu.Item key='enterprise'>
-                    <Link to={navTree.uc.enterprise.to}>
-                      {navTree.uc.enterprise.title}
-                    </Link>
-                  </Menu.Item>
-                </SubMenu>
-                <SubMenu
-                  key='tickets'
-                  title={
-                    <span>
-                      {' '}<Icon type='red-envelope' />
-                      {navTree.tickets.title}
-                    </span>
-                  }
-                >
-                  <Menu.Item key='hotel'>
-                    <Link to={navTree.tickets.hotel.to}>
-                      {navTree.tickets.hotel.title}
-                    </Link>
-                  </Menu.Item>
-                </SubMenu>
-                <SubMenu
-                  key='operation'
-                  title={
-                    <span>
-                      <Icon type='trophy' />
-                      {navTree.operation.title}
-                    </span>
-                  }
-                >
-                  <Menu.Item key='appointmentlist'>
-                    <Link to={navTree.operation.appointmentList.to}>
-                      {navTree.operation.appointmentList.title}
-                    </Link>
-                  </Menu.Item>
+                <Menu.Item key="evaluate">
+                  <Link to={navTree.uc.evaluate.to}>
+                    {navTree.uc.evaluate.title}
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="enterprise">
+                  <Link to={navTree.uc.enterprise.to}>
+                    {navTree.uc.enterprise.title}
+                  </Link>
+                </Menu.Item>
+              </SubMenu>
+              <SubMenu
+                key="tickets"
+                title={
+                  <span>
+                    {' '}
+                    <Icon type="red-envelope" />
+                    {navTree.tickets.title}
+                  </span>
+                }
+              >
+                <Menu.Item key="hotel">
+                  <Link to={navTree.tickets.hotel.to}>
+                    {navTree.tickets.hotel.title}
+                  </Link>
+                </Menu.Item>
+              </SubMenu>
+              <SubMenu
+                key="operation"
+                title={
+                  <span>
+                    <Icon type="trophy" />
+                    {navTree.operation.title}
+                  </span>
+                }
+              >
+                <Menu.Item key="appointmentlist">
+                  <Link to={navTree.operation.appointmentList.to}>
+                    {navTree.operation.appointmentList.title}
+                  </Link>
+                </Menu.Item>
 
-                  <Menu.Item key='recommend'>
-                    <Link to={navTree.operation.recommendCompanyList.to}>
-                      {navTree.operation.recommendCompanyList.title}
-                    </Link>
-                  </Menu.Item>
-                  <Menu.Item key='experience'>
-                    <Link to={navTree.operation.experienceRecords.to}>
-                      {navTree.operation.experienceRecords.title}
-                    </Link>
-                  </Menu.Item>
-                  {/* <Menu.Item key='4'>option4</Menu.Item> */}
-                </SubMenu>
-                {/* <Menu.Item key='2'>
+                <Menu.Item key="recommend">
+                  <Link to={navTree.operation.recommendCompanyList.to}>
+                    {navTree.operation.recommendCompanyList.title}
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="experience">
+                  <Link to={navTree.operation.experienceRecords.to}>
+                    {navTree.operation.experienceRecords.title}
+                  </Link>
+                </Menu.Item>
+                {/* <Menu.Item key='4'>option4</Menu.Item> */}
+              </SubMenu>
+              {/* <Menu.Item key='2'>
                   <Icon type='video-camera' />
                   <span>xxx</span>
                 </Menu.Item>
@@ -166,8 +171,9 @@ class PageFrame extends PureComponent {
                   <Icon type='shop' />
                   <span>nav 8</span>
                 </Menu.Item> */}
-              </Menu>
-            </Sider>}
+            </Menu>
+          </Sider>
+        )}
 
         <Layout>
           <Header
