@@ -1,11 +1,11 @@
-process.traceDeprecation = true;
+process.traceDeprecation = true
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HtmlWebpackTemplate = require('html-webpack-template')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
-
+// const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
+const OfflinePlugin = require('offline-plugin')
 const parts = require('./webpack.parts')
 
 const PATHS = {
@@ -32,28 +32,35 @@ const common = merge([
       new HtmlWebpackPlugin({
         template: 'template.html',
         title: 'SpaceX',
-        minify:{collapseWhitespace:true,collapseBooleanAttributes:true,removeEmptyAttributes:true},
+        minify: {
+          collapseWhitespace: true,
+          collapseBooleanAttributes: true,
+          removeEmptyAttributes: true
+        },
         appMountId: 'app', // Generate #app where to mount
         favicon: 'favicon.ico',
         mobile: true, // Scale page on mobile
         inject: true // html-webpack-template requires this to work
       }),
-      new SWPrecacheWebpackPlugin({
-        cacheId: 'my-project-name',
-        filename: 'my-service-worker.js',
-        maximumFileSizeToCacheInBytes: 4194304,
-        minify: true,
-        runtimeCaching: [
-          {
-            urlPattern: /^https:\/\/at\.alicdn\.com/,
-            handler: 'fastest'
-          },
-          {
-            urlPattern: /^https:\/\/www\.amap\.com/,
-            handler: 'fastest'
-          }
-        ],
-        staticFileGlobsIgnorePatterns: [/\.map$/] // use this to ignore sourcemap files
+      // new SWPrecacheWebpackPlugin({
+      //   cacheId: 'my-project-name',
+      //   filename: 'my-service-worker.js',
+      //   maximumFileSizeToCacheInBytes: 4194304,
+      //   minify: true,
+      //   runtimeCaching: [
+      //     {
+      //       urlPattern: /^https:\/\/at\.alicdn\.com/,
+      //       handler: 'fastest'
+      //     },
+      //     {
+      //       urlPattern: /^https:\/\/www\.amap\.com/,
+      //       handler: 'fastest'
+      //     }
+      //   ],
+      //   staticFileGlobsIgnorePatterns: [/\.map$/] // use this to ignore sourcemap files
+      // })
+      new OfflinePlugin({
+        externals: ['https://at.alicdn.com/t/font_zck90zmlh7hf47vi.woff']
       })
     ],
     resolve: {
@@ -97,7 +104,13 @@ module.exports = function(env) {
         bundles: [
           {
             name: 'vendor',
-            entries: ['react', 'react-router', 'react-dom', 'ramda','babel-polyfill']
+            entries: [
+              'react',
+              'react-router',
+              'react-dom',
+              'ramda',
+              'babel-polyfill'
+            ]
           },
           {
             name: 'manifest'
